@@ -1,16 +1,16 @@
 {
-  "meta": { "version": 2 },
+  "meta": { "version": 3, "profile": "PA military defaults" },
   "defaults": {
     "adults": 2,
     "children": 1,
     "nights": 5,
-    "useSOG": false,
+    "useSOG": true,
     "ticket": {
       "adultPre": 753.83,
-      "childPre": 0,
+      "childPre": 699.00,
       "taxPct": 6.5,
       "sogDiscPct": 20,
-      "childFallback": true
+      "childFallback": false
     },
     "roomStandard": {
       "preTaxTotal": 563,
