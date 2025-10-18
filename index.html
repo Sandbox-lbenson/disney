@@ -10,7 +10,6 @@
   <div class="container">
     <header class="header">
       <h1>Disney Trip Planner</h1>
-      <p>Five nights by default. One child age 6. Rank E‑6 (SOG Category I eligible).</p>
     </header>
 
     <nav class="tabs">
@@ -29,15 +28,15 @@
         <div class="grid grid-4">
           <label class="field">
             <span>Adults (10+)</span>
-            <input id="adults" class="input calc" type="number" min="0" value="2" />
+            <input id="adults" class="input calc" type="number" min="0" />
           </label>
           <label class="field">
             <span>Children (3–9)</span>
-            <input id="children" class="input calc" type="number" min="0" value="1" />
+            <input id="children" class="input calc" type="number" min="0" />
           </label>
           <label class="field">
             <span>Nights</span>
-            <input id="nights" class="input calc" type="number" min="1" value="5" />
+            <input id="nights" class="input calc" type="number" min="1" />
           </label>
           <label class="field check">
             <input id="useSOG" class="calc" type="checkbox" />
@@ -52,34 +51,35 @@
           <div class="actions">
             <button id="presetBase5" class="btn btn-ghost">Preset 5‑day Base: 753.83</button>
             <button id="presetHop5" class="btn btn-ghost">Preset 5‑day Hopper: 858.83</button>
+            <button id="useChildEstimateBtn" class="btn">Use child estimate</button>
           </div>
         </div>
         <div class="grid grid-2">
           <label class="field">
             <span>Adult ticket (pre‑tax)</span>
-            <input id="adultTicketPre" class="input calc" type="number" step="0.01" value="753.83" />
+            <input id="adultTicketPre" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
             <span>Child ticket (pre‑tax)</span>
-            <input id="childTicketPre" class="input calc" type="number" step="0.01" placeholder="leave blank until known" />
+            <input id="childTicketPre" class="input calc" type="number" step="0.01" placeholder="click 'Use child estimate' if unknown" />
           </label>
         </div>
         <div class="grid grid-3 mt">
           <label class="field">
             <span>Ticket tax % (standard)</span>
-            <input id="ticketTaxPct" class="input calc" type="number" step="0.01" value="6.5" />
+            <input id="ticketTaxPct" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
             <span>SOG discount %</span>
             <select id="sogDiscPct" class="input calc">
-              <option value="20" selected>3+ days ≈ 20%</option>
+              <option value="20">3+ days ≈ 20%</option>
               <option value="10">1–2 days ≈ 10%</option>
             </select>
           </label>
           <label class="field">
             <span>Use adult price for child if blank</span>
             <select id="childFallback" class="input calc">
-              <option value="1" selected>Yes</option>
+              <option value="1">Yes</option>
               <option value="0">No</option>
             </select>
           </label>
@@ -94,23 +94,23 @@
             <div class="grid grid-2">
               <label class="field">
                 <span>Base room (pre‑tax total)</span>
-                <input id="stdRoomPre" class="input calc" type="number" step="0.01" value="563" />
+                <input id="stdRoomPre" class="input calc" type="number" step="0.01" />
               </label>
               <label class="field">
                 <span>Room tax %</span>
-                <input id="stdRoomTaxPct" class="input calc" type="number" step="0.01" value="12.5" />
+                <input id="stdRoomTaxPct" class="input calc" type="number" step="0.01" />
               </label>
               <label class="field">
                 <span>Resort fee / night (pre‑tax)</span>
-                <input id="stdResortNight" class="input calc" type="number" step="0.01" value="36" />
+                <input id="stdResortNight" class="input calc" type="number" step="0.01" />
               </label>
               <label class="field">
                 <span>Resort fee tax %</span>
-                <input id="stdResortTaxPct" class="input calc" type="number" step="0.01" value="12.5" />
+                <input id="stdResortTaxPct" class="input calc" type="number" step="0.01" />
               </label>
               <label class="field">
                 <span>Hotel parking / night (with tax)</span>
-                <input id="stdParkingNight" class="input calc" type="number" step="0.01" value="33.75" />
+                <input id="stdParkingNight" class="input calc" type="number" step="0.01" />
               </label>
             </div>
           </div>
@@ -120,11 +120,11 @@
             <div class="grid grid-2">
               <label class="field">
                 <span>Nightly rate (tax‑free)</span>
-                <input id="sogNight" class="input calc" type="number" step="0.01" value="184" />
+                <input id="sogNight" class="input calc" type="number" step="0.01" />
               </label>
               <label class="field">
                 <span>SOG parking / night</span>
-                <input id="sogParkingNight" class="input calc" type="number" step="0.01" value="24" />
+                <input id="sogParkingNight" class="input calc" type="number" step="0.01" />
               </label>
             </div>
             <p class="hint">No room tax and no resort fee at SOG. Buses to parks included.</p>
@@ -140,42 +140,42 @@
         <div class="grid grid-4">
           <label class="field">
             <span>Travelers</span>
-            <input id="flyTrav" class="input calc" type="number" min="0" value="3" />
+            <input id="flyTrav" class="input calc" type="number" min="0" />
           </label>
           <label class="field">
             <span>Flight price / traveler</span>
-            <input id="flightPer" class="input calc" type="number" step="0.01" value="340" />
+            <input id="flightPer" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
             <span>Parking days at PIT</span>
-            <input id="pitDays" class="input calc" type="number" min="0" value="6" />
+            <input id="pitDays" class="input calc" type="number" min="0" />
           </label>
           <label class="field">
             <span>Gas to PIT</span>
-            <input id="pitGas" class="input calc" type="number" step="0.01" value="40" />
+            <input id="pitGas" class="input calc" type="number" step="0.01" />
           </label>
         </div>
         <div class="grid grid-3 mt">
           <label class="field">
             <span>Parking / day at PIT</span>
-            <input id="pitParkPer" class="input calc" type="number" step="0.01" value="13" />
+            <input id="pitParkPer" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
             <span>Airport transfer</span>
             <select id="airXfer" class="input calc">
-              <option value="bus" selected>LYNX bus</option>
+              <option value="bus">LYNX bus</option>
               <option value="uber">Uber</option>
             </select>
           </label>
           <label class="field">
             <span>Uber round‑trip</span>
-            <input id="uberRT" class="input calc" type="number" step="0.01" value="100" />
+            <input id="uberRT" class="input calc" type="number" step="0.01" />
           </label>
         </div>
         <div class="grid grid-2 mt">
           <label class="field">
             <span>LYNX fare per ride</span>
-            <input id="busFare" class="input calc" type="number" step="0.01" value="2" />
+            <input id="busFare" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
             <span>Notes</span>
@@ -189,48 +189,48 @@
         <div class="grid grid-4">
           <label class="field">
             <span>Round‑trip miles</span>
-            <input id="drvMiles" class="input calc" type="number" value="2200" />
+            <input id="drvMiles" class="input calc" type="number" />
           </label>
           <label class="field">
             <span>MPG</span>
-            <input id="drvMPG" class="input calc" type="number" step="0.1" value="22" />
+            <input id="drvMPG" class="input calc" type="number" step="0.1" />
           </label>
           <label class="field">
             <span>Gas price</span>
-            <input id="drvGasPrice" class="input calc" type="number" step="0.01" value="3.04" />
+            <input id="drvGasPrice" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
             <span>Highway hotel nights</span>
-            <input id="drvHotelNights" class="input calc" type="number" min="0" value="2" />
+            <input id="drvHotelNights" class="input calc" type="number" min="0" />
           </label>
         </div>
         <div class="grid grid-4 mt">
           <label class="field">
             <span>Highway hotel nightly</span>
-            <input id="drvHotelPer" class="input calc" type="number" step="0.01" value="120" />
+            <input id="drvHotelPer" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
             <span>Road food / travel day</span>
-            <input id="drvFoodPer" class="input calc" type="number" value="60" />
+            <input id="drvFoodPer" class="input calc" type="number" />
           </label>
           <label class="field">
             <span>Travel days (round‑trip)</span>
-            <input id="drvDays" class="input calc" type="number" min="0" value="4" />
+            <input id="drvDays" class="input calc" type="number" min="0" />
           </label>
           <label class="field">
             <span>Drive to parks (days)</span>
-            <input id="parkDriveDays" class="input calc" type="number" min="0" value="0" />
+            <input id="parkDriveDays" class="input calc" type="number" min="0" />
           </label>
         </div>
         <div class="grid grid-3 mt">
           <label class="field">
             <span>Theme‑park parking / day</span>
-            <input id="parkParkingPer" class="input calc" type="number" step="0.01" value="35" />
+            <input id="parkParkingPer" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
             <span>Use hotel parking charges</span>
             <select id="useHotelParking" class="input calc">
-              <option value="1" selected>Yes (include)</option>
+              <option value="1">Yes (include)</option>
               <option value="0">No</option>
             </select>
           </label>
@@ -240,29 +240,29 @@
         <div class="grid grid-4">
           <label class="field">
             <span>Moving hours</span>
-            <input id="moveHours" class="input calc" type="number" step="0.1" value="16.5" />
+            <input id="moveHours" class="input calc" type="number" step="0.1" />
           </label>
           <label class="field">
             <span>Hours driving / day</span>
-            <input id="hoursPerDay" class="input calc" type="number" step="0.1" value="8" />
+            <input id="hoursPerDay" class="input calc" type="number" step="0.1" />
           </label>
           <label class="field">
             <span>Break every (hours)</span>
-            <input id="breakEvery" class="input calc" type="number" step="0.1" value="2.5" />
+            <input id="breakEvery" class="input calc" type="number" step="0.1" />
           </label>
           <label class="field">
             <span>Break minutes each</span>
-            <input id="breakMins" class="input calc" type="number" step="1" value="20" />
+            <input id="breakMins" class="input calc" type="number" step="1" />
           </label>
         </div>
         <div class="grid grid-3 mt">
           <label class="field">
             <span>Fuel stops (round‑trip)</span>
-            <input id="fuelStops" class="input calc" type="number" step="1" value="6" />
+            <input id="fuelStops" class="input calc" type="number" step="1" />
           </label>
           <label class="field">
             <span>Fuel stop minutes each</span>
-            <input id="fuelStopMins" class="input calc" type="number" step="1" value="10" />
+            <input id="fuelStopMins" class="input calc" type="number" step="1" />
           </label>
         </div>
       </div>
@@ -272,15 +272,15 @@
         <div class="grid grid-3">
           <label class="field">
             <span>Days counted for food</span>
-            <input id="stayFoodDays" class="input calc" type="number" min="0" value="5" />
+            <input id="stayFoodDays" class="input calc" type="number" min="0" />
           </label>
           <label class="field">
             <span>Food / day</span>
-            <input id="stayFoodPer" class="input calc" type="number" value="100" />
+            <input id="stayFoodPer" class="input calc" type="number" />
           </label>
           <label class="field">
             <span>Souvenirs (total)</span>
-            <input id="souvenirBudget" class="input calc" type="number" value="500" />
+            <input id="souvenirBudget" class="input calc" type="number" />
           </label>
         </div>
       </div>
@@ -289,80 +289,46 @@
     <!-- TAB: EXTRAS -->
     <section id="extras" class="tab">
       <div class="card">
-        <h2>Lightning Lane & premium experiences</h2>
-        <div class="grid grid-3">
+        <h2>Add an extra</h2>
+        <div class="grid grid-4">
           <label class="field">
-            <span>Multi Pass price (pp/day)</span>
-            <input id="llMultiPer" class="input calc" type="number" value="0" />
+            <span>Pick from menu</span>
+            <select id="extraMenu" class="input"></select>
           </label>
           <label class="field">
-            <span>Multi Pass days</span>
-            <input id="llMultiDays" class="input calc" type="number" value="0" />
+            <span>Price (editable)</span>
+            <input id="extraPrice" class="input" type="number" step="0.01" />
           </label>
           <label class="field">
-            <span>Multi Pass people</span>
-            <input id="llMultiPeople" class="input calc" type="number" value="3" />
+            <span>Quantity</span>
+            <input id="extraQty" class="input" type="number" step="1" min="0" />
           </label>
+          <div class="field">
+            <span>&nbsp;</span>
+            <div class="row gap">
+              <button id="useSuggestedQty" class="btn">Use suggested qty</button>
+              <button id="addExtraBtn" class="btn btn-dark">Add extra</button>
+            </div>
+          </div>
         </div>
-        <div class="grid grid-3 mt">
-          <label class="field">
-            <span>Single Pass price (pp/ride)</span>
-            <input id="llSinglePer" class="input calc" type="number" value="0" />
-          </label>
-          <label class="field">
-            <span>Single Pass rides</span>
-            <input id="llSingleCount" class="input calc" type="number" value="0" />
-          </label>
-          <label class="field">
-            <span>Single Pass people</span>
-            <input id="llSinglePeople" class="input calc" type="number" value="3" />
-          </label>
-        </div>
+        <div id="extraNote" class="hint mt"></div>
       </div>
 
       <div class="card">
-        <h2>Events & builds</h2>
-        <div class="grid grid-3">
-          <label class="field">
-            <span>Dessert party (adult)</span>
-            <input id="dessertAdult" class="input calc" type="number" value="0" />
-          </label>
-          <label class="field">
-            <span>Dessert party (child)</span>
-            <input id="dessertChild" class="input calc" type="number" value="0" />
-          </label>
-          <label class="field">
-            <span>Dessert party total attendees</span>
-            <input id="dessertQty" class="input calc" type="number" value="0" />
-          </label>
+        <h2>Extras list</h2>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr><th>Item</th><th>Qty</th><th>Unit</th><th>Total</th><th></th></tr>
+            </thead>
+            <tbody id="extrasBody"></tbody>
+            <tfoot>
+              <tr><th colspan="3" class="tr">Extras subtotal</th><th id="extrasTotal" class="tr">$0.00</th><th></th></tr>
+            </tfoot>
+          </table>
         </div>
-        <div class="grid grid-3 mt">
-          <label class="field">
-            <span>Savi’s lightsaber (each)</span>
-            <input id="saviPer" class="input calc" type="number" step="0.01" value="274.99" />
-          </label>
-          <label class="field">
-            <span>Savi’s qty</span>
-            <input id="saviQty" class="input calc" type="number" value="0" />
-          </label>
-          <label class="field">
-            <span>Droid Depot (each)</span>
-            <input id="droidPer" class="input calc" type="number" value="129" />
-          </label>
-        </div>
-        <div class="grid grid-3 mt">
-          <label class="field">
-            <span>Droid qty</span>
-            <input id="droidQty" class="input calc" type="number" value="0" />
-          </label>
-          <label class="field">
-            <span>Memory Maker</span>
-            <input id="memoryMaker" class="input calc" type="number" value="0" />
-          </label>
-          <label class="field">
-            <span>Other extras (total)</span>
-            <input id="otherExtras" class="input calc" type="number" value="0" />
-          </label>
+        <div class="row gap mt">
+          <button id="clearExtras" class="btn">Clear extras</button>
         </div>
       </div>
     </section>
