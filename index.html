@@ -10,28 +10,28 @@
   <div class="container">
     <header class="header">
       <h1>Disney Trip Planner</h1>
+      <p>Config driven calculator for tickets, room, transport, food, and extras.</p>
     </header>
 
     <nav class="tabs">
-      <button class="tab-btn active" data-tab="tickets">Tickets & Room</button>
-      <button class="tab-btn" data-tab="transport">Transport & Food</button>
+      <button class="tab-btn active" data-tab="tickets">Tickets and Room</button>
+      <button class="tab-btn" data-tab="transport">Transport and Food</button>
       <button class="tab-btn" data-tab="extras">Extras</button>
       <button class="tab-btn" data-tab="summary">Summary</button>
       <div class="spacer"></div>
       <button id="resetBtn" class="btn btn-dark">Reset</button>
     </nav>
 
-    <!-- TAB: TICKETS & ROOM -->
     <section id="tickets" class="tab active">
       <div class="card">
         <h2>People</h2>
         <div class="grid grid-4">
           <label class="field">
-            <span>Adults (10+)</span>
+            <span>Adults 10+</span>
             <input id="adults" class="input calc" type="number" min="0" />
           </label>
           <label class="field">
-            <span>Children (3–9)</span>
+            <span>Children 3 to 9</span>
             <input id="children" class="input calc" type="number" min="0" />
           </label>
           <label class="field">
@@ -40,7 +40,7 @@
           </label>
           <label class="field check">
             <input id="useSOG" class="calc" type="checkbox" />
-            <span>Use Shades of Green room + tickets</span>
+            <span>Use Shades of Green room and tickets</span>
           </label>
         </div>
       </div>
@@ -49,31 +49,30 @@
         <div class="card-head">
           <h2>Ticket pricing</h2>
           <div class="actions">
-            <button id="presetBase5" class="btn btn-ghost">Preset 5‑day Base: 753.83</button>
-            <button id="presetHop5" class="btn btn-ghost">Preset 5‑day Hopper: 858.83</button>
-            <button id="useChildEstimateBtn" class="btn">Use child estimate</button>
+            <button id="presetBase5" class="btn btn-ghost">Preset 5 day base 753.83</button>
+            <button id="presetHop5" class="btn btn-ghost">Preset 5 day hopper 858.83</button>
           </div>
         </div>
         <div class="grid grid-2">
           <label class="field">
-            <span>Adult ticket (pre‑tax)</span>
+            <span>Adult ticket pre tax</span>
             <input id="adultTicketPre" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
-            <span>Child ticket (pre‑tax)</span>
-            <input id="childTicketPre" class="input calc" type="number" step="0.01" placeholder="click 'Use child estimate' if unknown" />
+            <span>Child ticket pre tax</span>
+            <input id="childTicketPre" class="input calc" type="number" step="0.01" />
           </label>
         </div>
         <div class="grid grid-3 mt">
           <label class="field">
-            <span>Ticket tax % (standard)</span>
+            <span>Ticket tax percent</span>
             <input id="ticketTaxPct" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
-            <span>SOG discount %</span>
+            <span>SOG discount percent</span>
             <select id="sogDiscPct" class="input calc">
-              <option value="20">3+ days ≈ 20%</option>
-              <option value="10">1–2 days ≈ 10%</option>
+              <option value="20">3 or more days about 20</option>
+              <option value="10">1 or 2 days about 10</option>
             </select>
           </label>
           <label class="field">
@@ -93,47 +92,45 @@
             <h3 class="subhead">Standard shuttle hotel</h3>
             <div class="grid grid-2">
               <label class="field">
-                <span>Base room (pre‑tax total)</span>
+                <span>Room pre tax total</span>
                 <input id="stdRoomPre" class="input calc" type="number" step="0.01" />
               </label>
               <label class="field">
-                <span>Room tax %</span>
+                <span>Room tax percent</span>
                 <input id="stdRoomTaxPct" class="input calc" type="number" step="0.01" />
               </label>
               <label class="field">
-                <span>Resort fee / night (pre‑tax)</span>
+                <span>Resort fee per night pre tax</span>
                 <input id="stdResortNight" class="input calc" type="number" step="0.01" />
               </label>
               <label class="field">
-                <span>Resort fee tax %</span>
+                <span>Resort fee tax percent</span>
                 <input id="stdResortTaxPct" class="input calc" type="number" step="0.01" />
               </label>
               <label class="field">
-                <span>Hotel parking / night (with tax)</span>
+                <span>Hotel parking per night with tax</span>
                 <input id="stdParkingNight" class="input calc" type="number" step="0.01" />
               </label>
             </div>
           </div>
-
           <div>
-            <h3 class="subhead">Shades of Green (Cat I, E‑6)</h3>
+            <h3 class="subhead">Shades of Green Category I</h3>
             <div class="grid grid-2">
               <label class="field">
-                <span>Nightly rate (tax‑free)</span>
+                <span>Nightly rate</span>
                 <input id="sogNight" class="input calc" type="number" step="0.01" />
               </label>
               <label class="field">
-                <span>SOG parking / night</span>
+                <span>SOG parking per night</span>
                 <input id="sogParkingNight" class="input calc" type="number" step="0.01" />
               </label>
             </div>
-            <p class="hint">No room tax and no resort fee at SOG. Buses to parks included.</p>
+            <p class="hint">No room tax and no resort fee at SOG. Park buses included.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TAB: TRANSPORT & FOOD -->
     <section id="transport" class="tab">
       <div class="card">
         <h2>Fly</h2>
@@ -143,7 +140,7 @@
             <input id="flyTrav" class="input calc" type="number" min="0" />
           </label>
           <label class="field">
-            <span>Flight price / traveler</span>
+            <span>Flight price per traveler</span>
             <input id="flightPer" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
@@ -157,7 +154,7 @@
         </div>
         <div class="grid grid-3 mt">
           <label class="field">
-            <span>Parking / day at PIT</span>
+            <span>Parking per day at PIT</span>
             <input id="pitParkPer" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
@@ -168,7 +165,7 @@
             </select>
           </label>
           <label class="field">
-            <span>Uber round‑trip</span>
+            <span>Uber round trip</span>
             <input id="uberRT" class="input calc" type="number" step="0.01" />
           </label>
         </div>
@@ -179,7 +176,7 @@
           </label>
           <label class="field">
             <span>Notes</span>
-            <div class="note">If Uber is used a booster seat is required; checking one might be free… or might not (phase of the moon; tea prices in China).</div>
+            <div class="note">If Uber is used a booster seat is required. Checking one might be free or might not.</div>
           </label>
         </div>
       </div>
@@ -188,7 +185,7 @@
         <h2>Drive</h2>
         <div class="grid grid-4">
           <label class="field">
-            <span>Round‑trip miles</span>
+            <span>Round trip miles</span>
             <input id="drvMiles" class="input calc" type="number" />
           </label>
           <label class="field">
@@ -210,44 +207,44 @@
             <input id="drvHotelPer" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
-            <span>Road food / travel day</span>
+            <span>Road food per travel day</span>
             <input id="drvFoodPer" class="input calc" type="number" />
           </label>
           <label class="field">
-            <span>Travel days (round‑trip)</span>
+            <span>Travel days round trip</span>
             <input id="drvDays" class="input calc" type="number" min="0" />
           </label>
           <label class="field">
-            <span>Drive to parks (days)</span>
+            <span>Drive to parks days</span>
             <input id="parkDriveDays" class="input calc" type="number" min="0" />
           </label>
         </div>
         <div class="grid grid-3 mt">
           <label class="field">
-            <span>Theme‑park parking / day</span>
+            <span>Theme park parking per day</span>
             <input id="parkParkingPer" class="input calc" type="number" step="0.01" />
           </label>
           <label class="field">
             <span>Use hotel parking charges</span>
             <select id="useHotelParking" class="input calc">
-              <option value="1">Yes (include)</option>
+              <option value="1">Yes include</option>
               <option value="0">No</option>
             </select>
           </label>
         </div>
 
-        <h3 class="subhead mt">Timing (per direction)</h3>
+        <h3 class="subhead mt">Timing per direction</h3>
         <div class="grid grid-4">
           <label class="field">
             <span>Moving hours</span>
             <input id="moveHours" class="input calc" type="number" step="0.1" />
           </label>
           <label class="field">
-            <span>Hours driving / day</span>
+            <span>Hours driving per day</span>
             <input id="hoursPerDay" class="input calc" type="number" step="0.1" />
           </label>
           <label class="field">
-            <span>Break every (hours)</span>
+            <span>Break every hours</span>
             <input id="breakEvery" class="input calc" type="number" step="0.1" />
           </label>
           <label class="field">
@@ -257,7 +254,7 @@
         </div>
         <div class="grid grid-3 mt">
           <label class="field">
-            <span>Fuel stops (round‑trip)</span>
+            <span>Fuel stops round trip</span>
             <input id="fuelStops" class="input calc" type="number" step="1" />
           </label>
           <label class="field">
@@ -268,25 +265,24 @@
       </div>
 
       <div class="card">
-        <h2>Food during stay & souvenirs</h2>
+        <h2>Food during stay and souvenirs</h2>
         <div class="grid grid-3">
           <label class="field">
             <span>Days counted for food</span>
             <input id="stayFoodDays" class="input calc" type="number" min="0" />
           </label>
           <label class="field">
-            <span>Food / day</span>
+            <span>Food per day</span>
             <input id="stayFoodPer" class="input calc" type="number" />
           </label>
           <label class="field">
-            <span>Souvenirs (total)</span>
+            <span>Souvenirs total</span>
             <input id="souvenirBudget" class="input calc" type="number" />
           </label>
         </div>
       </div>
     </section>
 
-    <!-- TAB: EXTRAS -->
     <section id="extras" class="tab">
       <div class="card">
         <h2>Add an extra</h2>
@@ -296,7 +292,7 @@
             <select id="extraMenu" class="input"></select>
           </label>
           <label class="field">
-            <span>Price (editable)</span>
+            <span>Price editable</span>
             <input id="extraPrice" class="input" type="number" step="0.01" />
           </label>
           <label class="field">
@@ -333,7 +329,6 @@
       </div>
     </section>
 
-    <!-- TAB: SUMMARY -->
     <section id="summary" class="tab">
       <div class="card">
         <h2>Tickets</h2>
@@ -357,7 +352,7 @@
       </div>
 
       <div class="card">
-        <h2>Extras & souvenirs</h2>
+        <h2>Extras and souvenirs</h2>
         <div id="extrasDetail" class="details"></div>
       </div>
 
@@ -373,7 +368,7 @@
       </div>
 
       <div class="card">
-        <h2>Head‑to‑head comparison</h2>
+        <h2>Head to head comparison</h2>
         <div id="compareDetail" class="details"></div>
       </div>
     </section>
