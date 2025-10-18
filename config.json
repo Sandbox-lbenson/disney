@@ -1,5 +1,5 @@
 {
-  "meta": { "version": 1, "notes": "Defaults and typical prices; edit to fit your dates." },
+  "meta": { "version": 2 },
   "defaults": {
     "adults": 2,
     "children": 1,
@@ -7,7 +7,7 @@
     "useSOG": false,
     "ticket": {
       "adultPre": 753.83,
-      "childPreEstimated": 699.00,
+      "childPre": 0,
       "taxPct": 6.5,
       "sogDiscPct": 20,
       "childFallback": true
@@ -58,15 +58,15 @@
     }
   },
   "extrasMenu": [
-    { "id": "ll_multi", "name": "Lightning Lane Multi Pass (pp/day)", "typicalPrice": 35, "typicalQty": 6, "suggest": "people_days", "notes": "Qty idea: people × days." },
-    { "id": "ll_single", "name": "Lightning Lane Single Pass (pp/ride)", "typicalPrice": 20, "typicalQty": 3, "suggest": "people", "notes": "Qty idea: people × rides." },
-    { "id": "memory_maker", "name": "Memory Maker (trip)", "typicalPrice": 185, "typicalQty": 1, "suggest": "one", "notes": "Advance purchase saves vs day-of." },
-    { "id": "dessert_adult", "name": "Fireworks Dessert Party (adult)", "typicalPrice": 115, "typicalQty": 2, "suggest": "adults", "notes": "Adults attending." },
-    { "id": "dessert_child", "name": "Fireworks Dessert Party (child)", "typicalPrice": 59, "typicalQty": 1, "suggest": "children", "notes": "Children attending." },
-    { "id": "savi", "name": "Savi’s Lightsaber (each)", "typicalPrice": 274.99, "typicalQty": 0, "suggest": "custom", "notes": "Reserve early." },
-    { "id": "droid", "name": "Droid Depot (each)", "typicalPrice": 129, "typicalQty": 0, "suggest": "custom", "notes": "Reserve early." },
-    { "id": "stroller", "name": "Stroller Rental (per day)", "typicalPrice": 18, "typicalQty": 5, "suggest": "days", "notes": "Qty idea: days needed." },
-    { "id": "character_meal", "name": "Character Dining (per person)", "typicalPrice": 55, "typicalQty": 3, "suggest": "people", "notes": "Qty idea: people going." },
-    { "id": "other", "name": "Other custom extra", "typicalPrice": 0, "typicalQty": 1, "suggest": "custom", "notes": "Enter your own price." }
+    { "id": "ll_multi", "name": "Lightning Lane Multi Pass per person per day", "typicalPrice": 35, "typicalQty": 6, "suggest": "people_days", "notes": "Qty idea is people times days." },
+    { "id": "ll_single", "name": "Lightning Lane Single Pass per person per ride", "typicalPrice": 20, "typicalQty": 3, "suggest": "people", "notes": "Qty idea is people times rides." },
+    { "id": "memory_maker", "name": "Memory Maker trip", "typicalPrice": 185, "typicalQty": 1, "suggest": "one", "notes": "" },
+    { "id": "dessert_adult", "name": "Fireworks Dessert Party adult", "typicalPrice": 115, "typicalQty": 2, "suggest": "adults", "notes": "" },
+    { "id": "dessert_child", "name": "Fireworks Dessert Party child", "typicalPrice": 59, "typicalQty": 1, "suggest": "children", "notes": "" },
+    { "id": "savi", "name": "Savi Lightsaber each", "typicalPrice": 274.99, "typicalQty": 0, "suggest": "custom", "notes": "" },
+    { "id": "droid", "name": "Droid Depot each", "typicalPrice": 129, "typicalQty": 0, "suggest": "custom", "notes": "" },
+    { "id": "stroller", "name": "Stroller rental per day", "typicalPrice": 18, "typicalQty": 5, "suggest": "days", "notes": "" },
+    { "id": "character_meal", "name": "Character dining per person", "typicalPrice": 55, "typicalQty": 3, "suggest": "people", "notes": "" },
+    { "id": "other", "name": "Other custom extra", "typicalPrice": 0, "typicalQty": 1, "suggest": "custom", "notes": "" }
   ]
 }
