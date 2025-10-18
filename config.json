@@ -1,0 +1,72 @@
+{
+  "meta": { "version": 1, "notes": "Defaults and typical prices; edit to fit your dates." },
+  "defaults": {
+    "adults": 2,
+    "children": 1,
+    "nights": 5,
+    "useSOG": false,
+    "ticket": {
+      "adultPre": 753.83,
+      "childPreEstimated": 699.00,
+      "taxPct": 6.5,
+      "sogDiscPct": 20,
+      "childFallback": true
+    },
+    "roomStandard": {
+      "preTaxTotal": 563,
+      "roomTaxPct": 12.5,
+      "resortNight": 36,
+      "resortTaxPct": 12.5,
+      "parkingNightWithTax": 33.75
+    },
+    "roomSOG": {
+      "night": 184,
+      "parkingNight": 24
+    },
+    "fly": {
+      "travelers": 3,
+      "pricePer": 340,
+      "pitDays": 6,
+      "pitGas": 40,
+      "pitParkPer": 13,
+      "transferMode": "bus",
+      "busFare": 2,
+      "uberRoundTrip": 100
+    },
+    "drive": {
+      "milesRT": 2200,
+      "mpg": 22,
+      "gasPrice": 3.04,
+      "hotelNights": 2,
+      "hotelPer": 120,
+      "roadFoodPerDay": 60,
+      "roadDays": 4,
+      "parkDriveDays": 0,
+      "parkParkingPer": 35,
+      "useHotelParking": true,
+      "movingHoursOneWay": 16.5,
+      "hoursPerDay": 8,
+      "breakEveryHours": 2.5,
+      "breakMinutesEach": 20,
+      "fuelStopsRT": 6,
+      "fuelStopMinutesEach": 10
+    },
+    "stay": {
+      "foodDays": 5,
+      "foodPerDay": 100,
+      "souvenirs": 500
+    }
+  },
+  "extrasMenu": [
+    { "id": "ll_multi", "name": "Lightning Lane Multi Pass (pp/day)", "typicalPrice": 35, "typicalQty": 6, "suggest": "people_days", "notes": "Qty idea: people × days." },
+    { "id": "ll_single", "name": "Lightning Lane Single Pass (pp/ride)", "typicalPrice": 20, "typicalQty": 3, "suggest": "people", "notes": "Qty idea: people × rides." },
+    { "id": "memory_maker", "name": "Memory Maker (trip)", "typicalPrice": 185, "typicalQty": 1, "suggest": "one", "notes": "Advance purchase saves vs day-of." },
+    { "id": "dessert_adult", "name": "Fireworks Dessert Party (adult)", "typicalPrice": 115, "typicalQty": 2, "suggest": "adults", "notes": "Adults attending." },
+    { "id": "dessert_child", "name": "Fireworks Dessert Party (child)", "typicalPrice": 59, "typicalQty": 1, "suggest": "children", "notes": "Children attending." },
+    { "id": "savi", "name": "Savi’s Lightsaber (each)", "typicalPrice": 274.99, "typicalQty": 0, "suggest": "custom", "notes": "Reserve early." },
+    { "id": "droid", "name": "Droid Depot (each)", "typicalPrice": 129, "typicalQty": 0, "suggest": "custom", "notes": "Reserve early." },
+    { "id": "stroller", "name": "Stroller Rental (per day)", "typicalPrice": 18, "typicalQty": 5, "suggest": "days", "notes": "Qty idea: days needed." },
+    { "id": "character_meal", "name": "Character Dining (per person)", "typicalPrice": 55, "typicalQty": 3, "suggest": "people", "notes": "Qty idea: people going." },
+    { "id": "other", "name": "Other custom extra", "typicalPrice": 0, "typicalQty": 1, "suggest": "custom", "notes": "Enter your own price." }
+  ]
+}
