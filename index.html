@@ -2,69 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Disney Trip Cost Sheet — 5 Nights</title>
+  <title>Disney Trip Planning Sheet</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 text-slate-900">
   <div class="max-w-4xl mx-auto p-6 space-y-10">
-    <header>
-      <h1 class="text-3xl font-bold">Disney Trip Cost Sheet</h1>
-      <p class="text-sm text-slate-600 mt-1">
-        Dates not fixed. Hotel is a shuttle property around $563 pre-tax. All numbers are estimates using current public pricing.
+
+    <header class="space-y-1">
+      <h1 class="text-3xl font-bold">Disney Trip Planning Sheet</h1>
+      <p class="text-sm text-slate-600">
+        Five nights. Shuttle hotel near Disney Springs around $563 base. Family of three with one child age 6. Rank E-6 for Shades of Green (Category I).
       </p>
     </header>
 
-    <section class="space-y-3">
-      <h2 class="text-xl font-semibold">Inputs used</h2>
-      <div class="rounded-xl bg-white shadow ring-1 ring-slate-200 p-4 text-sm leading-6">
-        <div>Tickets shown are for 5 days in early Oct 2026 from the Disney site screens.</div>
-        <div>Airport costs to PIT: gas $40, parking $13 per day. Parking is calculated for 6 days = $78.</div>
-        <div>Bus from MCO: LYNX Link 311 at $2 per person per ride.</div>
-        <div>Hotel taxes 12.5 percent. Typical resort fee $36 per night + 12.5 percent = $40.50 per night.</div>
-        <div>Drive option: 2,200 miles round trip, 22 mpg, gas $3.04 per gallon, road hotel $120 each direction, food on the road $60 per travel day.</div>
-        <div>Food during stay in Orlando set at $100 per day.</div>
-      </div>
-    </section>
-
     <section class="space-y-4">
-      <h2 class="text-xl font-semibold">Ticket prices for the week shown</h2>
+      <h2 class="text-xl font-semibold">Ticket options for five park days</h2>
+
       <div class="rounded-xl bg-white shadow ring-1 ring-slate-200 p-4 overflow-x-auto">
         <table class="min-w-full text-sm">
           <thead class="text-left text-slate-500 uppercase">
             <tr>
-              <th class="py-2">Ticket type (Ages 10+)</th>
+              <th class="py-2">Option</th>
               <th class="py-2 text-right">Per ticket pre-tax</th>
               <th class="py-2 text-right">Per ticket after 6.5% tax</th>
-              <th class="py-2 text-right">3 tickets after tax</th>
+              <th class="py-2 text-right">Three tickets after tax</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-200">
             <tr>
-              <td class="py-2">5-Day, 1 Park Per Day</td>
+              <td class="py-2">5-Day 1 Park Per Day</td>
               <td class="py-2 text-right">$753.83</td>
               <td class="py-2 text-right">$802.83</td>
               <td class="py-2 text-right">$2,408.49</td>
             </tr>
             <tr>
-              <td class="py-2">5-Day, Park Hopper</td>
+              <td class="py-2">5-Day Park Hopper</td>
               <td class="py-2 text-right">$858.83</td>
               <td class="py-2 text-right">$914.65</td>
-              <td class="py-2 text-right">$2,743.95</td>
+              <td class="py-2 text-right">$2,743.96</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="text-xs text-slate-600">If one ticket is a child 3-9, that ticket will be lower than the 10+ price for the same dates. Exact child prices depend on the date.</p>
+
+      <p class="text-xs text-slate-600">
+        These are adult 10+ amounts pulled from the Disney site. Child 3-9 pricing is lower. Replace one adult with the exact child price for your dates when you have it to lower the totals a bit.
+      </p>
     </section>
 
     <section class="space-y-4">
       <h2 class="text-xl font-semibold">Shades of Green tickets and room</h2>
+
       <div class="rounded-xl bg-white shadow ring-1 ring-slate-200 p-4 overflow-x-auto">
         <table class="min-w-full text-sm">
           <thead class="text-left text-slate-500 uppercase">
             <tr>
-              <th class="py-2">SOG item</th>
+              <th class="py-2">Item</th>
               <th class="py-2 text-right">Rate</th>
               <th class="py-2 text-right">Math</th>
               <th class="py-2 text-right">Total</th>
@@ -72,7 +66,7 @@
           </thead>
           <tbody class="divide-y divide-slate-200">
             <tr>
-              <td class="py-2">5-Day Disney tickets via SOG (about 20% off and tax-free)</td>
+              <td class="py-2">SOG 5-Day tickets, tax-free, about 20% off (3+ days)</td>
               <td class="py-2 text-right">Base</td>
               <td class="py-2 text-right">($753.83 × 0.80) × 3</td>
               <td class="py-2 text-right">$1,809.19</td>
@@ -84,7 +78,7 @@
               <td class="py-2 text-right">$2,061.19</td>
             </tr>
             <tr>
-              <td class="py-2">SOG room Cat I (no resort fee, tax-free)</td>
+              <td class="py-2">SOG room Cat I, E-6 qualifies</td>
               <td class="py-2 text-right">$184 per night</td>
               <td class="py-2 text-right">$184 × 5 nights</td>
               <td class="py-2 text-right">$920.00</td>
@@ -98,167 +92,118 @@
           </tbody>
         </table>
       </div>
-      <p class="text-xs text-slate-600">Cat II and Cat III are higher nightly rates. SOG bus service to the Disney parks is included. If not driving, SOG parking is $0.</p>
+
+      <p class="text-xs text-slate-600">
+        SOG has no resort fee and rooms are tax-free. SOG buses to the parks are included. Child tickets are also discounted and tax-free, which lowers totals further when you plug in the child amount.
+      </p>
     </section>
 
     <section class="space-y-4">
-      <h2 class="text-xl font-semibold">Plan A: Fly and use the LYNX bus</h2>
+      <h2 class="text-xl font-semibold">Plan A fly and use the bus</h2>
+
+      <div class="rounded-xl bg-white shadow ring-1 ring-slate-200 p-4">
+        <div class="text-sm">Flights are currently showing $340 to $384 per traveler round trip from PIT to MCO.</div>
+      </div>
+
       <div class="rounded-xl bg-white shadow ring-1 ring-slate-200 p-4 overflow-x-auto">
         <table class="min-w-full text-sm">
           <thead class="text-left text-slate-500 uppercase">
             <tr>
-              <th class="py-2">Item</th>
+              <th class="py-2">Line</th>
               <th class="py-2 text-right">Amount</th>
               <th class="py-2 text-right">Notes</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-200">
-            <tr>
-              <td class="py-2">Flights round trip</td>
-              <td class="py-2 text-right">$1,020 to $1,152</td>
-              <td class="py-2 text-right">$340 to $384 each</td>
-            </tr>
-            <tr>
-              <td class="py-2">Drive to PIT and parking</td>
-              <td class="py-2 text-right">$118.00</td>
-              <td class="py-2 text-right">Gas $40, parking $13 × 6 days</td>
-            </tr>
-            <tr>
-              <td class="py-2">Airport bus MCO to Disney Springs</td>
-              <td class="py-2 text-right">$12.00</td>
-              <td class="py-2 text-right">$2 × 3 people × 2 rides</td>
-            </tr>
-            <tr>
-              <td class="py-2">Hotel room with tax</td>
-              <td class="py-2 text-right">$633.38</td>
-              <td class="py-2 text-right">$563 + 12.5%</td>
-            </tr>
-            <tr>
-              <td class="py-2">Resort fee</td>
-              <td class="py-2 text-right">$202.50</td>
-              <td class="py-2 text-right">$40.50 × 5 nights</td>
-            </tr>
-            <tr>
-              <td class="py-2">Meals during stay</td>
-              <td class="py-2 text-right">$500.00</td>
-              <td class="py-2 text-right">$100 per day</td>
-            </tr>
+            <tr><td class="py-2">Flights for three</td><td class="py-2 text-right">$1,020 to $1,152</td><td class="py-2 text-right">$340 to $384 each</td></tr>
+            <tr><td class="py-2">Drive and park at PIT</td><td class="py-2 text-right">$118.00</td><td class="py-2 text-right">Gas $40, parking $13 × 6 days</td></tr>
+            <tr><td class="py-2">LYNX Link 311 MCO to Disney Springs</td><td class="py-2 text-right">$12.00</td><td class="py-2 text-right">$2 × 3 people × 2 rides</td></tr>
+            <tr><td class="py-2">Shuttle hotel room with tax</td><td class="py-2 text-right">$633.38</td><td class="py-2 text-right">$563 + 12.5%</td></tr>
+            <tr><td class="py-2">Resort fee</td><td class="py-2 text-right">$202.50</td><td class="py-2 text-right">$40.50 × 5 nights</td></tr>
+            <tr><td class="py-2">Meals during stay</td><td class="py-2 text-right">$500.00</td><td class="py-2 text-right">$100 per day</td></tr>
           </tbody>
         </table>
       </div>
 
-      <div class="grid gap-4">
-        <div class="rounded-xl bg-slate-100 ring-1 ring-slate-200 p-4">
-          <div class="font-semibold mb-2">Totals with 5-day tickets (offsite shuttle hotel)</div>
-          <div class="text-sm grid gap-1">
-            <div>5-day Base: $4,894 to $5,026</div>
-            <div>5-day Park Hopper: $5,230 to $5,362</div>
-          </div>
+      <div class="grid gap-3">
+        <div class="rounded-lg bg-slate-100 ring-1 ring-slate-200 p-3">
+          <div class="font-semibold">Totals with 5-day adult pricing</div>
+          <div class="text-sm">Base tickets: $4,894 to $5,026</div>
+          <div class="text-sm">Park Hopper: $5,230 to $5,362</div>
+          <div class="text-xs text-slate-600">Swap one adult for the exact child price when you pick dates to lower these totals.</div>
         </div>
 
-        <div class="rounded-xl bg-slate-100 ring-1 ring-slate-200 p-4">
-          <div class="font-semibold mb-2">Totals with 5-day tickets via SOG (Cat I room, no resort fee)</div>
-          <div class="text-sm grid gap-1">
-            <div>5-day Base: $4,379 to $4,511</div>
-            <div>5-day Park Hopper: $4,631 to $4,763</div>
-          </div>
+        <div class="rounded-lg bg-slate-100 ring-1 ring-slate-200 p-3">
+          <div class="font-semibold">Totals using SOG Cat I room and SOG tickets</div>
+          <div class="text-sm">Base tickets: $4,379 to $4,511</div>
+          <div class="text-sm">Park Hopper: $4,631 to $4,763</div>
         </div>
       </div>
 
-      <div class="rounded-lg bg-slate-50 ring-1 ring-slate-200 p-4 text-sm">
-        LYNX note: Link 311 is $2 per rider from MCO to Disney Springs and runs about every 30 minutes. If an Uber was used instead, figure about $100 round trip and it would require bringing a booster seat, which might be free to check on the plane, or it might not depending on the phase of the moon and the current price of tea in China.
+      <div class="rounded-lg bg-slate-50 ring-1 ring-slate-200 p-4 text-sm leading-6">
+        LYNX note. Link 311 runs every 30 minutes and costs $2 per rider to Disney Springs. If an Uber was used instead the round trip is about $100 and a booster seat would be required. That might be free to check on the plane or it might not depending on the phase of the moon and the current price of tea in China.
       </div>
     </section>
 
     <section class="space-y-4">
-      <h2 class="text-xl font-semibold">Plan B: Drive</h2>
+      <h2 class="text-xl font-semibold">Plan B drive</h2>
+
       <div class="rounded-xl bg-white shadow ring-1 ring-slate-200 p-4 overflow-x-auto">
         <table class="min-w-full text-sm">
           <thead class="text-left text-slate-500 uppercase">
             <tr>
-              <th class="py-2">Item</th>
+              <th class="py-2">Line</th>
               <th class="py-2 text-right">Amount</th>
               <th class="py-2 text-right">Notes</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-200">
-            <tr>
-              <td class="py-2">Gas round trip</td>
-              <td class="py-2 text-right">$304.00</td>
-              <td class="py-2 text-right">2,200 miles, 22 mpg, $3.04 per gallon</td>
-            </tr>
-            <tr>
-              <td class="py-2">Road hotel nights</td>
-              <td class="py-2 text-right">$240.00</td>
-              <td class="py-2 text-right">1 night each way at $120</td>
-            </tr>
-            <tr>
-              <td class="py-2">Road meals and snacks</td>
-              <td class="py-2 text-right">$240.00</td>
-              <td class="py-2 text-right">4 travel days at $60</td>
-            </tr>
-            <tr>
-              <td class="py-2">Hotel room with tax</td>
-              <td class="py-2 text-right">$633.38</td>
-              <td class="py-2 text-right">$563 + 12.5%</td>
-            </tr>
-            <tr>
-              <td class="py-2">Resort fee</td>
-              <td class="py-2 text-right">$202.50</td>
-              <td class="py-2 text-right">$40.50 × 5 nights</td>
-            </tr>
-            <tr>
-              <td class="py-2">Hotel self-parking</td>
-              <td class="py-2 text-right">$168.75</td>
-              <td class="py-2 text-right">$33.75 × 5 nights</td>
-            </tr>
-            <tr>
-              <td class="py-2">Meals during stay</td>
-              <td class="py-2 text-right">$500.00</td>
-              <td class="py-2 text-right">$100 per day</td>
-            </tr>
+            <tr><td class="py-2">Gas round trip</td><td class="py-2 text-right">$304.00</td><td class="py-2 text-right">2,200 miles, 22 mpg, $3.04 per gallon</td></tr>
+            <tr><td class="py-2">Road hotels</td><td class="py-2 text-right">$240.00</td><td class="py-2 text-right">One night each direction at $120</td></tr>
+            <tr><td class="py-2">Road meals and snacks</td><td class="py-2 text-right">$240.00</td><td class="py-2 text-right">Four travel days at $60</td></tr>
+            <tr><td class="py-2">Hotel room with tax</td><td class="py-2 text-right">$633.38</td><td class="py-2 text-right">$563 + 12.5%</td></tr>
+            <tr><td class="py-2">Resort fee</td><td class="py-2 text-right">$202.50</td><td class="py-2 text-right">$40.50 × 5 nights</td></tr>
+            <tr><td class="py-2">Hotel self-parking</td><td class="py-2 text-right">$168.75</td><td class="py-2 text-right">$33.75 × 5 nights</td></tr>
+            <tr><td class="py-2">Meals during stay</td><td class="py-2 text-right">$500.00</td><td class="py-2 text-right">$100 per day</td></tr>
           </tbody>
         </table>
       </div>
 
-      <div class="grid gap-4">
-        <div class="rounded-xl bg-slate-100 ring-1 ring-slate-200 p-4">
-          <div class="font-semibold mb-2">Totals with 5-day tickets (offsite shuttle hotel)</div>
-          <div class="text-sm grid gap-1">
-            <div>5-day Base: $4,697</div>
-            <div>5-day Park Hopper: $5,033</div>
-            <div>Add $70 if parking at the parks for 2 days</div>
-          </div>
+      <div class="grid gap-3">
+        <div class="rounded-lg bg-slate-100 ring-1 ring-slate-200 p-3">
+          <div class="font-semibold">Totals with 5-day adult pricing</div>
+          <div class="text-sm">Base tickets: $4,697</div>
+          <div class="text-sm">Park Hopper: $5,033</div>
+          <div class="text-xs text-slate-600">Add $70 if driving to the parks for two days. Using hotel shuttles avoids it.</div>
         </div>
 
-        <div class="rounded-xl bg-slate-100 ring-1 ring-slate-200 p-4">
-          <div class="font-semibold mb-2">Totals with 5-day tickets via SOG (Cat I room)</div>
-          <div class="text-sm grid gap-1">
-            <div>5-day Base: $4,133</div>
-            <div>5-day Park Hopper: $4,385</div>
-            <div>Includes SOG parking $120 for 5 nights</div>
-          </div>
+        <div class="rounded-lg bg-slate-100 ring-1 ring-slate-200 p-3">
+          <div class="font-semibold">Totals using SOG Cat I room and SOG tickets</div>
+          <div class="text-sm">Base tickets: $4,133</div>
+          <div class="text-sm">Park Hopper: $4,385</div>
+          <div class="text-xs text-slate-600">Includes SOG parking at $24 per day for five nights.</div>
         </div>
       </div>
 
-      <div class="rounded-lg bg-slate-50 ring-1 ring-slate-200 p-4 text-sm">
-        Time and stops per direction: moving time about 16.5 hours. Breaks every 2 to 3 hours for 15 to 30 minutes adds about 2 to 4 hours. One hotel night per direction. Fuel stops around 6 to 7 total for the round trip depending on tank size and speed.
+      <div class="rounded-lg bg-slate-50 ring-1 ring-slate-200 p-4 text-sm leading-6">
+        Time and stops each direction. Wheels moving about 16.5 hours. Break every 2 to 3 hours for 15 to 30 minutes adds about 2 to 4 hours. One hotel night each direction. Fuel stops. If fueling about every 5 hours plan about 3 per direction. If planning by miles at roughly 330 miles per tank plan around 3 to 4 per direction.
       </div>
     </section>
 
     <section class="space-y-4">
       <h2 class="text-xl font-semibold">Budget alternative</h2>
+
       <div class="rounded-xl bg-white shadow ring-1 ring-slate-200 p-4 text-sm">
-        <p class="mb-3">Two park days with 1 Park Per Day tickets. Adult 10+ ranges for many dates: about $128 to $153 per day before tax. That is about $818 to $978 after tax for 3 tickets total. Totals below keep all other items the same.</p>
+        <p class="mb-3">Two park days with 1 Park Per Day tickets. Many dates show per-day pricing around $128 before tax. Example math below keeps all other lines the same.</p>
         <div class="grid gap-3">
           <div class="rounded-lg bg-slate-100 ring-1 ring-slate-200 p-3">
-            <div class="font-semibold">Fly + LYNX + 2 days</div>
+            <div class="font-semibold">Fly and bus, two park days</div>
             <div>$3,304 to $3,596</div>
           </div>
           <div class="rounded-lg bg-slate-100 ring-1 ring-slate-200 p-3">
-            <div class="font-semibold">Drive + 2 days</div>
+            <div class="font-semibold">Drive, two park days</div>
             <div>$3,107 to $3,266</div>
-            <div>Add $70 if parking at the parks for 2 days</div>
+            <div>Add $70 if driving to the parks for two days</div>
           </div>
         </div>
       </div>
@@ -266,6 +211,7 @@
 
     <section class="space-y-4">
       <h2 class="text-xl font-semibold">Sample schedule to see a lot</h2>
+
       <div class="rounded-xl bg-white shadow ring-1 ring-slate-200 p-4 overflow-x-auto">
         <table class="min-w-full text-sm">
           <thead class="text-left text-slate-500 uppercase">
@@ -276,11 +222,11 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-200">
-            <tr><td class="py-2">1</td><td class="py-2">Arrive, bus to hotel, Disney Springs evening</td><td class="py-2">Pick up groceries and water</td></tr>
-            <tr><td class="py-2">2</td><td class="py-2">Magic Kingdom morning, break, EPCOT evening (Hopper)</td><td class="py-2">Rope drop, fireworks</td></tr>
-            <tr><td class="py-2">3</td><td class="py-2">Hollywood Studios morning, EPCOT afternoon/evening (Hopper)</td><td class="py-2">Headliners early</td></tr>
+            <tr><td class="py-2">1</td><td class="py-2">Arrive, bus to hotel, Disney Springs evening</td><td class="py-2">Groceries and water</td></tr>
+            <tr><td class="py-2">2</td><td class="py-2">Magic Kingdom morning, EPCOT evening</td><td class="py-2">Rope drop, fireworks</td></tr>
+            <tr><td class="py-2">3</td><td class="py-2">Hollywood Studios morning, EPCOT afternoon</td><td class="py-2">Headliners early</td></tr>
             <tr><td class="py-2">4</td><td class="py-2">Animal Kingdom morning, pool break, MK late</td><td class="py-2">Night rides</td></tr>
-            <tr><td class="py-2">5</td><td class="py-2">Free choice park day</td><td class="py-2">Fill any misses</td></tr>
+            <tr><td class="py-2">5</td><td class="py-2">Free choice park day</td><td class="py-2">Catch misses</td></tr>
             <tr><td class="py-2">6</td><td class="py-2">Depart</td><td class="py-2"></td></tr>
           </tbody>
         </table>
@@ -290,18 +236,14 @@
       <div class="rounded-xl bg-white shadow ring-1 ring-slate-200 p-4 overflow-x-auto">
         <table class="min-w-full text-sm">
           <thead class="text-left text-slate-500 uppercase">
-            <tr>
-              <th class="py-2">Day</th>
-              <th class="py-2">Plan</th>
-              <th class="py-2">Notes</th>
-            </tr>
+            <tr><th class="py-2">Day</th><th class="py-2">Plan</th><th class="py-2">Notes</th></tr>
           </thead>
           <tbody class="divide-y divide-slate-200">
-            <tr><td class="py-2">1</td><td class="py-2">Arrive, Disney Springs walk, no park</td><td class="py-2">Keep food spend low</td></tr>
-            <tr><td class="py-2">2</td><td class="py-2">Magic Kingdom</td><td class="py-2">Rope drop strategy</td></tr>
-            <tr><td class="py-2">3</td><td class="py-2">Resort pool and Springs</td><td class="py-2">No park</td></tr>
+            <tr><td class="py-2">1</td><td class="py-2">Arrive, Disney Springs walk</td><td class="py-2">No park</td></tr>
+            <tr><td class="py-2">2</td><td class="py-2">Magic Kingdom</td><td class="py-2">Rope drop</td></tr>
+            <tr><td class="py-2">3</td><td class="py-2">Pool and Springs</td><td class="py-2">No park</td></tr>
             <tr><td class="py-2">4</td><td class="py-2">Animal Kingdom</td><td class="py-2">Early safari</td></tr>
-            <tr><td class="py-2">5</td><td class="py-2">Free day or Springs</td><td class="py-2">No park</td></tr>
+            <tr><td class="py-2">5</td><td class="py-2">Free day</td><td class="py-2">No park</td></tr>
             <tr><td class="py-2">6</td><td class="py-2">Depart</td><td class="py-2"></td></tr>
           </tbody>
         </table>
@@ -310,6 +252,7 @@
 
     <section class="space-y-4">
       <h2 class="text-xl font-semibold">Optional extras</h2>
+
       <div class="rounded-xl bg-white shadow ring-1 ring-slate-200 p-4 overflow-x-auto">
         <table class="min-w-full text-sm">
           <thead class="text-left text-slate-500 uppercase">
@@ -321,8 +264,8 @@
           </thead>
           <tbody class="divide-y divide-slate-200">
             <tr><td class="py-2">Lightning Lane Multi Pass</td><td class="py-2 text-right">$17 to $45 per person per day</td><td class="py-2">Varies by park and date</td></tr>
-            <tr><td class="py-2">Lightning Lane Single Pass</td><td class="py-2 text-right">$13 to $25 per person per ride</td><td class="py-2">For top headliners</td></tr>
-            <tr><td class="py-2">Memory Maker photos</td><td class="py-2 text-right">$185 advance, $210 day-of</td><td class="py-2">Unlimited downloads</td></tr>
+            <tr><td class="py-2">Lightning Lane Single Pass</td><td class="py-2 text-right">$13 to $25 per person per ride</td><td class="py-2">Headliners only</td></tr>
+            <tr><td class="py-2">Memory Maker photos</td><td class="py-2 text-right">$185 advance, $210 day of</td><td class="py-2">Unlimited downloads</td></tr>
             <tr><td class="py-2">Fireworks Dessert Party</td><td class="py-2 text-right">$99 to $134 adult, $59 child</td><td class="py-2">Reserved viewing</td></tr>
             <tr><td class="py-2">Savi’s Workshop lightsaber</td><td class="py-2 text-right">$274.99 + tax</td><td class="py-2">Hollywood Studios</td></tr>
             <tr><td class="py-2">Droid Depot build</td><td class="py-2 text-right">$129 + tax</td><td class="py-2">Hollywood Studios</td></tr>
@@ -335,7 +278,8 @@
 
     <section class="space-y-4">
       <h2 class="text-xl font-semibold">Souvenir examples</h2>
-      <p class="text-sm">Budget $500 to $1,000 total is realistic. Examples:</p>
+      <p class="text-sm">Plan $500 to $1,000 total. A few reference prices:</p>
+
       <div class="rounded-xl bg-white shadow ring-1 ring-slate-200 p-4 overflow-x-auto">
         <table class="min-w-full text-sm">
           <thead class="text-left text-slate-500 uppercase">
@@ -345,13 +289,13 @@
               <th class="py-2">Notes</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-slate-200">
-            <tr><td class="py-2">Minnie or Mickey Ear Headbands</td><td class="py-2">$36.99 to $44.99</td><td class="py-2">Common styles around $39.99</td></tr>
+        <tbody class="divide-y divide-slate-200">
+            <tr><td class="py-2">Minnie or Mickey ear headbands</td><td class="py-2">$36.99 to $44.99</td><td class="py-2">Common styles around $39.99</td></tr>
             <tr><td class="py-2">MagicBand+</td><td class="py-2">$44.99 and up</td><td class="py-2">Design dependent</td></tr>
-            <tr><td class="py-2">Bubble Wand</td><td class="py-2">$39.99</td><td class="py-2">Batteries not included sometimes</td></tr>
+            <tr><td class="py-2">Bubble wand</td><td class="py-2">$39.99</td><td class="py-2">Batteries can be extra</td></tr>
             <tr><td class="py-2">Spirit Jersey</td><td class="py-2">$79.99</td><td class="py-2">Adult sizes</td></tr>
-            <tr><td class="py-2">Custom Lightsaber</td><td class="py-2">$274.99 + tax</td><td class="py-2">Savi’s Workshop</td></tr>
-            <tr><td class="py-2">Custom Droid</td><td class="py-2">$129 + tax</td><td class="py-2">Droid Depot</td></tr>
+            <tr><td class="py-2">Custom lightsaber</td><td class="py-2">$274.99 + tax</td><td class="py-2">Savi’s Workshop</td></tr>
+            <tr><td class="py-2">Custom droid</td><td class="py-2">$129 + tax</td><td class="py-2">Droid Depot</td></tr>
           </tbody>
         </table>
       </div>
@@ -359,6 +303,7 @@
 
     <section class="space-y-4">
       <h2 class="text-xl font-semibold">In-park food examples</h2>
+
       <div class="rounded-xl bg-white shadow ring-1 ring-slate-200 p-4 overflow-x-auto">
         <table class="min-w-full text-sm">
           <thead class="text-left text-slate-500 uppercase">
@@ -369,11 +314,11 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-200">
-            <tr><td class="py-2">Bacon Cheeseburger with fries</td><td class="py-2">Cosmic Ray’s, MK</td><td class="py-2">$13.99</td></tr>
-            <tr><td class="py-2">Chili-cheese hot dog</td><td class="py-2">Casey’s Corner, MK</td><td class="py-2">$13.49</td></tr>
+            <tr><td class="py-2">Bacon cheeseburger with fries</td><td class="py-2">Cosmic Ray’s, MK</td><td class="py-2">$13.99</td></tr>
+            <tr><td class="py-2">Chili cheese hot dog</td><td class="py-2">Casey’s Corner, MK</td><td class="py-2">$13.49</td></tr>
             <tr><td class="py-2">Dole Whip, cup</td><td class="py-2">Aloha Isle, MK</td><td class="py-2">$5.79</td></tr>
             <tr><td class="py-2">Mickey pretzel</td><td class="py-2">Snack carts</td><td class="py-2">$8.49</td></tr>
-            <tr><td class="py-2">Popcorn bucket + refills</td><td class="py-2">Carts</td><td class="py-2">$14 to $15.50 bucket, $2.25 to $2.49 refills</td></tr>
+            <tr><td class="py-2">Popcorn bucket plus refills</td><td class="py-2">Carts</td><td class="py-2">$14 to $15.50 bucket, $2.25 to $2.49 refills</td></tr>
             <tr><td class="py-2">Bottled water</td><td class="py-2">Most locations</td><td class="py-2">$4.00</td></tr>
             <tr><td class="py-2">Smartwater</td><td class="py-2">Most locations</td><td class="py-2">$6.00 to $6.25</td></tr>
             <tr><td class="py-2">Hand-dipped Mickey bar</td><td class="py-2">Select locations</td><td class="py-2">$7.79</td></tr>
@@ -383,7 +328,7 @@
     </section>
 
     <footer class="text-xs text-slate-600">
-      All numbers can change with dates and hotel choice.
+      This sheet is for planning and quick math. Swap in the exact child ticket price for your dates to refine the totals.
     </footer>
   </div>
 </body>
