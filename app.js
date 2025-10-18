@@ -1,20 +1,138 @@
+/* -------- Helpers -------- */
 function money(n){
   const v = Math.round((Number(n) + Number.EPSILON) * 100) / 100;
   return "$" + v.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
 }
-function num(id){
-  const el = document.getElementById(id);
-  const v = parseFloat(el.value);
-  return isNaN(v) ? 0 : v;
-}
-function setVal(id,v){ document.getElementById(id).value = v; }
-function html(id,s){ document.getElementById(id).innerHTML = s; }
+function num(id){ const v = parseFloat(document.getElementById(id).value); return isNaN(v) ? 0 : v; }
+function setVal(id,v){ const el=document.getElementById(id); if(el) el.value=v; }
+function html(id,s){ const el=document.getElementById(id); if(el) el.innerHTML=s; }
 
+/* -------- Global state -------- */
+let CONFIG = null;
+const FALLBACK_CONFIG = {
+  meta:{version:1},
+  defaults:{
+    adults:2, children:1, nights:5, useSOG:false,
+    ticket:{adultPre:753.83, childPreEstimated:699.00, taxPct:6.5, sogDiscPct:20, childFallback:true},
+    roomStandard:{preTaxTotal:563, roomTaxPct:12.5, resortNight:36, resortTaxPct:12.5, parkingNightWithTax:33.75},
+    roomSOG:{night:184, parkingNight:24},
+    fly:{travelers:3, pricePer:340, pitDays:6, pitGas:40, pitParkPer:13, transferMode:"bus", busFare:2, uberRoundTrip:100},
+    drive:{milesRT:2200, mpg:22, gasPrice:3.04, hotelNights:2, hotelPer:120, roadFoodPerDay:60, roadDays:4, parkDriveDays:0, parkParkingPer:35, useHotelParking:true, movingHoursOneWay:16.5, hoursPerDay:8, breakEveryHours:2.5, breakMinutesEach:20, fuelStopsRT:6, fuelStopMinutesEach:10},
+    stay:{foodDays:5, foodPerDay:100, souvenirs:500}
+  },
+  extrasMenu:[
+    {"id":"ll_multi","name":"Lightning Lane Multi Pass (pp/day)","typicalPrice":35,"typicalQty":6,"suggest":"people_days","notes":"Qty idea: people × days."},
+    {"id":"ll_single","name":"Lightning Lane Single Pass (pp/ride)","typicalPrice":20,"typicalQty":3,"suggest":"people","notes":"Qty idea: people × rides."},
+    {"id":"memory_maker","name":"Memory Maker (trip)","typicalPrice":185,"typicalQty":1,"suggest":"one","notes":"Advance purchase saves vs day-of."},
+    {"id":"dessert_adult","name":"Fireworks Dessert Party (adult)","typicalPrice":115,"typicalQty":2,"suggest":"adults","notes":"Adults attending."},
+    {"id":"dessert_child","name":"Fireworks Dessert Party (child)","typicalPrice":59,"typicalQty":1,"suggest":"children","notes":"Children attending."},
+    {"id":"savi","name":"Savi’s Lightsaber (each)","typicalPrice":274.99,"typicalQty":0,"suggest":"custom","notes":"Reserve early."},
+    {"id":"droid","name":"Droid Depot (each)","typicalPrice":129,"typicalQty":0,"suggest":"custom","notes":"Reserve early."},
+    {"id":"stroller","name":"Stroller Rental (per day)","typicalPrice":18,"typicalQty":5,"suggest":"days","notes":"Qty idea: days needed."},
+    {"id":"character_meal","name":"Character Dining (per person)","typicalPrice":55,"typicalQty":3,"suggest":"people","notes":"Qty idea: people going."},
+    {"id":"other","name":"Other custom extra","typicalPrice":0,"typicalQty":1,"suggest":"custom","notes":"Enter your own price."}
+  ]
+};
+let state = { extras: [] };
+
+/* -------- Config load & apply -------- */
+async function loadConfig(){
+  try{
+    const res = await fetch("config.json",{cache:"no-store"});
+    if(!res.ok) throw new Error("Config fetch failed");
+    CONFIG = await res.json();
+  }catch(e){
+    CONFIG = JSON.parse(JSON.stringify(FALLBACK_CONFIG));
+  }
+  applyConfig(CONFIG);
+  initEvents();
+  activateTab("tickets");
+  fillSummary();
+}
+
+function applyConfig(cfg){
+  const d = cfg.defaults;
+
+  // People
+  setVal("adults", d.adults);
+  setVal("children", d.children);
+  setVal("nights", d.nights);
+  document.getElementById("useSOG").checked = !!d.useSOG;
+
+  // Tickets
+  setVal("adultTicketPre", d.ticket.adultPre);
+  setVal("childTicketPre", ""); // left blank; user can click "Use child estimate"
+  setVal("ticketTaxPct", d.ticket.taxPct);
+  setVal("sogDiscPct", d.ticket.sogDiscPct);
+  setVal("childFallback", d.ticket.childFallback ? "1" : "0");
+
+  // Room standard
+  setVal("stdRoomPre", d.roomStandard.preTaxTotal);
+  setVal("stdRoomTaxPct", d.roomStandard.roomTaxPct);
+  setVal("stdResortNight", d.roomStandard.resortNight);
+  setVal("stdResortTaxPct", d.roomStandard.resortTaxPct);
+  setVal("stdParkingNight", d.roomStandard.parkingNightWithTax);
+
+  // Room SOG
+  setVal("sogNight", d.roomSOG.night);
+  setVal("sogParkingNight", d.roomSOG.parkingNight);
+
+  // Fly
+  setVal("flyTrav", d.fly.travelers);
+  setVal("flightPer", d.fly.pricePer);
+  setVal("pitDays", d.fly.pitDays);
+  setVal("pitGas", d.fly.pitGas);
+  setVal("pitParkPer", d.fly.pitParkPer);
+  setVal("busFare", d.fly.busFare);
+  setVal("uberRT", d.fly.uberRoundTrip);
+  setVal("airXfer", d.fly.transferMode);
+
+  // Drive
+  setVal("drvMiles", d.drive.milesRT);
+  setVal("drvMPG", d.drive.mpg);
+  setVal("drvGasPrice", d.drive.gasPrice);
+  setVal("drvHotelNights", d.drive.hotelNights);
+  setVal("drvHotelPer", d.drive.hotelPer);
+  setVal("drvFoodPer", d.drive.roadFoodPerDay);
+  setVal("drvDays", d.drive.roadDays);
+  setVal("parkDriveDays", d.drive.parkDriveDays);
+  setVal("parkParkingPer", d.drive.parkParkingPer);
+  setVal("useHotelParking", d.drive.useHotelParking ? "1" : "0");
+  setVal("moveHours", d.drive.movingHoursOneWay);
+  setVal("hoursPerDay", d.drive.hoursPerDay);
+  setVal("breakEvery", d.drive.breakEveryHours);
+  setVal("breakMins", d.drive.breakMinutesEach);
+  setVal("fuelStops", d.drive.fuelStopsRT);
+  setVal("fuelStopMins", d.drive.fuelStopMinutesEach);
+
+  // Stay
+  setVal("stayFoodDays", d.stay.foodDays);
+  setVal("stayFoodPer", d.stay.foodPerDay);
+  setVal("souvenirBudget", d.stay.souvenirs);
+
+  // Extras menu
+  const sel = document.getElementById("extraMenu");
+  sel.innerHTML = "";
+  cfg.extrasMenu.forEach(item=>{
+    const opt = document.createElement("option");
+    opt.value = item.id;
+    opt.textContent = item.name;
+    sel.appendChild(opt);
+  });
+  // Init extra controls from selected menu item
+  onExtraMenuChange();
+  // Hook: child estimate button uses config value
+  document.getElementById("useChildEstimateBtn").onclick = ()=>{
+    setVal("childTicketPre", d.ticket.childPreEstimated);
+    fillSummary();
+  };
+}
+
+/* -------- Core calculations -------- */
 function readPeople(){
   return { adults: num("adults"), children: num("children"), nights: num("nights") };
 }
 
-/* ---- Core calcs ---- */
 function calcTickets(useSOGOverride=null){
   const {adults, children} = readPeople();
   const useSOG = (useSOGOverride===null) ? document.getElementById("useSOG").checked : !!useSOGOverride;
@@ -22,7 +140,9 @@ function calcTickets(useSOGOverride=null){
   const adultPre = num("adultTicketPre");
   const childPreRaw = num("childTicketPre");
   const fallback = document.getElementById("childFallback").value === "1";
-  const childPre = childPreRaw>0 ? childPreRaw : (fallback ? adultPre : 0);
+  // If child price blank, prefer the config estimate, else adult price if fallback allowed
+  const estChild = (CONFIG?.defaults?.ticket?.childPreEstimated ?? 0);
+  const childPre = childPreRaw>0 ? childPreRaw : (estChild>0 ? estChild : (fallback ? adultPre : 0));
 
   const taxPct = num("ticketTaxPct")/100;
   const discPct = num("sogDiscPct")/100;
@@ -100,35 +220,103 @@ function calcFly(){
   return { total, text: lines.join("<br>") };
 }
 
+/* -------- Extras (menu-driven) -------- */
+function extrasConfigById(id){
+  return (CONFIG?.extrasMenu || []).find(x=>x.id===id) || (FALLBACK_CONFIG.extrasMenu.find(x=>x.id===id));
+}
+function getPeople(){ const p = readPeople(); return p.adults + p.children; }
+function getDays(){ return num("stayFoodDays") || readPeople().nights; }
+
+function suggestQtyFor(extra){
+  const people = getPeople();
+  const days = getDays();
+  switch(extra.suggest){
+    case "people_days": return Math.max(0, people * days);
+    case "people": return Math.max(0, people);
+    case "adults": return Math.max(0, num("adults"));
+    case "children": return Math.max(0, num("children"));
+    case "days": return Math.max(0, days);
+    case "nights": return Math.max(0, readPeople().nights);
+    case "one": return 1;
+    default: return extra.typicalQty ?? 0;
+  }
+}
+
+function onExtraMenuChange(){
+  const id = document.getElementById("extraMenu").value;
+  const cfg = extrasConfigById(id);
+  if(!cfg) return;
+  setVal("extraPrice", cfg.typicalPrice ?? 0);
+  setVal("extraQty", cfg.typicalQty ?? 1);
+  const sg = suggestQtyFor(cfg);
+  html("extraNote", `Typical price: ${money(cfg.typicalPrice||0)}. ${cfg.notes || ""} <br>Suggested qty right now: <strong>${sg}</strong>`);
+}
+
+function useSuggestedQty(){
+  const id = document.getElementById("extraMenu").value;
+  const cfg = extrasConfigById(id);
+  if(!cfg) return;
+  setVal("extraQty", suggestQtyFor(cfg));
+  fillSummary();
+}
+
+function addExtra(){
+  const id = document.getElementById("extraMenu").value;
+  const name = (extrasConfigById(id)?.name) || "Custom extra";
+  const price = num("extraPrice");
+  const qty = num("extraQty");
+  if(price<=0 || qty<=0) return;
+  state.extras.push({name, price, qty});
+  renderExtras();
+  fillSummary();
+}
+
+function removeExtra(index){
+  state.extras.splice(index,1);
+  renderExtras();
+  fillSummary();
+}
+
+function renderExtras(){
+  const tbody = document.getElementById("extrasBody");
+  const rows = state.extras.map((e,i)=>(
+    `<tr>
+       <td>${e.name}</td>
+       <td class="tr">${e.qty}</td>
+       <td class="tr">${money(e.price)}</td>
+       <td class="tr">${money(e.price*e.qty)}</td>
+       <td class="tr"><button class="btn btn-ghost" data-rm="${i}">✕</button></td>
+     </tr>`
+  ));
+  tbody.innerHTML = rows.join("") || `<tr><td colspan="5">No extras added yet.</td></tr>`;
+  document.querySelectorAll("[data-rm]").forEach(b=>{
+    b.addEventListener("click", ()=> removeExtra(parseInt(b.dataset.rm,10)));
+  });
+  document.getElementById("extrasTotal").textContent = money(getExtrasOnlyTotal());
+}
+
+function getExtrasOnlyTotal(){
+  return state.extras.reduce((sum,x)=> sum + (x.price * x.qty), 0);
+}
+
 function calcExtrasTotal(){
-  // Lightning Lane bundles
-  const mp = num("llMultiPer"), mpd = num("llMultiDays"), mpp = num("llMultiPeople");
-  const multi = mp * mpd * mpp;
+  // Extras (menu list) + souvenirs input
+  return getExtrasOnlyTotal() + num("souvenirBudget");
+}
 
-  // Individual Lightning Lanes
-  const sp = num("llSinglePer"), spc = num("llSingleCount"), spp = num("llSinglePeople");
-  const single = sp * spc * spp;
-
-  // Dessert party, allocate adults first then children
-  const da = num("dessertAdult"), dc = num("dessertChild"), dq = num("dessertQty");
-  const { adults, children } = readPeople();
-  const dAdults = Math.min(dq, adults);
-  const dChildren = Math.min(children, Math.max(0, dq - dAdults));
-  const dessert = da * dAdults + dc * dChildren;
-
-  // Builds & other
-  const sav = num("saviPer") * num("saviQty");
-  const dro = num("droidPer") * num("droidQty");
-  const mm  = num("memoryMaker");
-  const other = num("otherExtras");
+function renderExtrasSummary(){
+  const lines = state.extras.map(e => `${e.name}: ${e.qty} × ${money(e.price)} = ${money(e.price*e.qty)}`);
+  const extras = getExtrasOnlyTotal();
   const sov = num("souvenirBudget");
-
-  return multi + single + dessert + sav + dro + mm + other + sov;
+  const total = extras + sov;
+  return (lines.join("<br>") || "No extras added.")
+    + `<br><strong>Extras subtotal:</strong> ${money(extras)}`
+    + `<br><strong>Souvenirs:</strong> ${money(sov)}`
+    + `<br><strong>Extras + souvenirs total:</strong> ${money(total)}`;
 }
 
-function calcStayFood(){
-  return num("stayFoodPer") * num("stayFoodDays");
-}
+/* -------- Plans -------- */
+function calcStayFood(){ return num("stayFoodPer") * num("stayFoodDays"); }
 
 function calcDrive(useSOGOverride=null){
   const miles = num("drvMiles"), mpg = num("drvMPG"), gp = num("drvGasPrice");
@@ -181,7 +369,7 @@ function calcFlyPlan(useSOGOverride=null){
   return { total, text: lines.join("<br>") };
 }
 
-/* ---- Summary & comparison ---- */
+/* -------- Summary & comparison -------- */
 function buildComparison(){
   const flyStd   = calcFlyPlan(false);
   const flySOG   = calcFlyPlan(true);
@@ -194,7 +382,6 @@ function buildComparison(){
     ["Drive (Standard)", driveStd.total],
     ["Drive (SOG)",      driveSOG.total]
   ];
-
   const cheapest = matrix.reduce((a,b)=> b[1] < a[1] ? b : a, matrix[0]);
 
   let rows = `
@@ -205,10 +392,9 @@ function buildComparison(){
   matrix.forEach(([label, val])=>{
     const delta = val - cheapest[1];
     const badge = (val===cheapest[1]) ? " (cheapest)" : "";
-    rows += `<tr><td>${label}${badge}</td><td>${money(val)}</td><td>${delta===0?"—":money(delta)}</td></tr>`;
+    rows += `<tr><td>${label}${badge}</td><td class="tr">${money(val)}</td><td class="tr">${delta===0?"—":money(delta)}</td></tr>`;
   });
   rows += "</tbody></table>";
-
   html("compareDetail", rows);
 }
 
@@ -222,14 +408,14 @@ function fillSummary(){
   html("roomDetail", room.text);
   html("flyDetail", flyPlan.text);
   html("driveDetail", drive.text);
-  html("extrasDetail", "Extras & souvenirs total " + money(calcExtrasTotal()));
+  html("extrasDetail", renderExtrasSummary());
   html("flyTotal", money(flyPlan.total));
   html("driveTotal", money(drive.total));
 
   buildComparison();
 }
 
-/* ---- Tabs, events, presets ---- */
+/* -------- Tabs, events, presets -------- */
 function activateTab(name){
   document.querySelectorAll(".tab").forEach(s=>s.classList.remove("active"));
   document.getElementById(name).classList.add("active");
@@ -237,24 +423,28 @@ function activateTab(name){
   document.querySelector(`.tab-btn[data-tab="${name}"]`).classList.add("active");
 }
 
-function init(){
+function initEvents(){
   document.querySelectorAll(".tab-btn").forEach(b=>{
     b.addEventListener("click", ()=>activateTab(b.dataset.tab));
   });
-
   document.querySelectorAll(".calc").forEach(el=>{
     el.addEventListener("input", fillSummary);
     el.addEventListener("change", fillSummary);
   });
 
+  // Presets
   document.getElementById("presetBase5").addEventListener("click", ()=>{ setVal("adultTicketPre",753.83); fillSummary(); });
-  document.getElementById("presetHop5").addEventListener("click", ()=>{ setVal("adultTicketPre",858.83); fillSummary(); });
+  document.getElementById("presetHop5").addEventListener("click",  ()=>{ setVal("adultTicketPre",858.83); fillSummary(); });
 
+  // Extras
+  document.getElementById("extraMenu").addEventListener("change", onExtraMenuChange);
+  document.getElementById("useSuggestedQty").addEventListener("click", useSuggestedQty);
+  document.getElementById("addExtraBtn").addEventListener("click", addExtra);
+  document.getElementById("clearExtras").addEventListener("click", ()=>{ state.extras=[]; renderExtras(); fillSummary(); });
+
+  // Reset
   document.getElementById("resetBtn").addEventListener("click", ()=>location.reload());
-
-  // Initial render
-  activateTab("tickets");
-  fillSummary();
 }
 
-document.addEventListener("DOMContentLoaded", init);
+/* -------- Boot -------- */
+document.addEventListener("DOMContentLoaded", loadConfig);
