@@ -27,7 +27,6 @@ function applyConfig(cfg){
   document.getElementById("useSOG").checked=!!d.useSOG
   setVal("adultTicketPre",d.ticket.adultPre);setVal("childTicketPre",d.ticket.childPre)
   setVal("ticketTaxPct",d.ticket.taxPct);setVal("sogDiscPct",d.ticket.sogDiscPct)
-  setVal("childFallback",d.ticket.childFallback?"1":"0")
   setVal("stdRoomPre",d.roomStandard.preTaxTotal);setVal("stdRoomTaxPct",d.roomStandard.roomTaxPct)
   setVal("stdResortNight",d.roomStandard.resortNight);setVal("stdResortTaxPct",d.roomStandard.resortTaxPct)
   setVal("stdParkingNight",d.roomStandard.parkingNightWithTax)
@@ -55,9 +54,8 @@ function calcTickets(useSOGOverride=null){
   const p=readPeople()
   const useSOG=(useSOGOverride===null)?document.getElementById("useSOG").checked:!!useSOGOverride
   const adultPre=num("adultTicketPre")
-  const childPreRaw=num("childTicketPre")
-  const fallback=document.getElementById("childFallback").value==="1"
-  const childPre=childPreRaw>0?childPreRaw:(fallback?adultPre:0)
+  const childEl=document.getElementById("childTicketPre")
+  const childPre=(childEl.value.trim()==="")?(CONFIG?.defaults?.ticket?.childPre||0):num("childTicketPre")
   const taxPct=num("ticketTaxPct")/100
   const discPct=num("sogDiscPct")/100
   const tax=useSOG?0:taxPct
@@ -129,7 +127,7 @@ function onExtraMenuChange(){
   setVal("extraPrice",cfg.typicalPrice||0)
   setVal("extraQty",cfg.typicalQty||1)
   const sg=suggestQtyFor(cfg)
-  html("extraNote","Typical price "+money(cfg.typicalPrice||0)+". "+(cfg.notes||"")+"<br>Suggested qty now "+sg)
+  html("extraNote","Typical price "+money(cfg.typicalPrice||0)+(cfg.notes?". "+cfg.notes:"")+"<br>Suggested qty now "+sg)
 }
 
 function useSuggestedQty(){
