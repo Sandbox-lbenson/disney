@@ -4,556 +4,415 @@
   <meta charset="utf-8" />
   <title>Disney Trip Planner</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="bg-slate-50 text-slate-900">
-  <div class="max-w-4xl mx-auto p-6 space-y-6">
-    <header class="space-y-1">
-      <h1 class="text-3xl font-bold">Disney Trip Planner</h1>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Disney Trip Planner</h1>
+      <p>Five nights by default. One child age 6. Rank E‑6 (SOG Category I eligible).</p>
     </header>
 
-    <nav class="flex gap-2 text-sm">
-      <button data-tab="tickets" class="tab-btn px-4 py-2 rounded-lg bg-white ring-1 ring-slate-200 shadow">Tickets and Room</button>
-      <button data-tab="transport" class="tab-btn px-4 py-2 rounded-lg bg-white ring-1 ring-slate-200">Transport</button>
-      <button data-tab="extras" class="tab-btn px-4 py-2 rounded-lg bg-white ring-1 ring-slate-200">Extras</button>
-      <button data-tab="summary" class="tab-btn px-4 py-2 rounded-lg bg-white ring-1 ring-slate-200">Summary</button>
-      <div class="grow"></div>
-      <button id="resetBtn" class="px-3 py-2 rounded-lg bg-slate-900 text-white">Reset</button>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="tickets">Tickets & Room</button>
+      <button class="tab-btn" data-tab="transport">Transport & Food</button>
+      <button class="tab-btn" data-tab="extras">Extras</button>
+      <button class="tab-btn" data-tab="summary">Summary</button>
+      <div class="spacer"></div>
+      <button id="resetBtn" class="btn btn-dark">Reset</button>
     </nav>
 
-    <section id="tickets" class="tab space-y-4">
-      <div class="grid gap-4">
-        <div class="bg-white p-4 rounded-xl ring-1 ring-slate-200 shadow">
-          <div class="flex items-center justify-between">
-            <div class="font-semibold">People</div>
-          </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-3 text-sm">
-            <label class="grid">
-              <span class="text-slate-600">Adults 10+</span>
-              <input id="adults" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="2">
-            </label>
-            <label class="grid">
-              <span class="text-slate-600">Children 3-9</span>
-              <input id="children" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="1">
-            </label>
-            <label class="grid">
-              <span class="text-slate-600">Nights</span>
-              <input id="nights" type="number" min="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="5">
-            </label>
-            <label class="flex items-center gap-2 mt-6">
-              <input id="useSOG" type="checkbox" class="calc-input w-4 h-4">
-              <span>Use SOG room and tickets</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="bg-white p-4 rounded-xl ring-1 ring-slate-200 shadow">
-          <div class="flex items-center justify-between">
-            <div class="font-semibold">Ticket pricing</div>
-            <div class="flex gap-2">
-              <button id="presetBase5" class="px-3 py-1 rounded-lg ring-1 ring-slate-300 text-xs">Preset 5 day base 753.83</button>
-              <button id="presetHop5" class="px-3 py-1 rounded-lg ring-1 ring-slate-300 text-xs">Preset 5 day hopper 858.83</button>
-            </div>
-          </div>
-          <div class="grid sm:grid-cols-2 gap-3 mt-3 text-sm">
-            <label class="grid">
-              <span class="text-slate-600">Adult ticket pre-tax</span>
-              <input id="adultTicketPre" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="753.83">
-            </label>
-            <label class="grid">
-              <span class="text-slate-600">Child ticket pre-tax</span>
-              <input id="childTicketPre" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" placeholder="">
-            </label>
-          </div>
-          <div class="grid sm:grid-cols-3 gap-3 mt-3 text-sm">
-            <label class="grid">
-              <span class="text-slate-600">Sales tax percent (standard)</span>
-              <input id="ticketTaxPct" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="6.5">
-            </label>
-            <label class="grid">
-              <span class="text-slate-600">SOG discount percent</span>
-              <select id="sogDiscPct" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300">
-                <option value="20" selected>3+ days about 20</option>
-                <option value="10">1-2 days about 10</option>
-              </select>
-            </label>
-            <label class="grid">
-              <span class="text-slate-600">Use adult price for child if blank</span>
-              <select id="childFallback" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300">
-                <option value="1" selected>Yes</option>
-                <option value="0">No</option>
-              </select>
-            </label>
-          </div>
-        </div>
-
-        <div class="bg-white p-4 rounded-xl ring-1 ring-slate-200 shadow">
-          <div class="font-semibold">Room pricing</div>
-          <div class="grid sm:grid-cols-2 gap-4 mt-3">
-            <div class="grid gap-2">
-              <div class="text-sm text-slate-600">Standard shuttle hotel</div>
-              <div class="grid sm:grid-cols-2 gap-3 text-sm">
-                <label class="grid">
-                  <span>Base room pre-tax total</span>
-                  <input id="stdRoomPre" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="563">
-                </label>
-                <label class="grid">
-                  <span>Room tax percent</span>
-                  <input id="stdRoomTaxPct" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="12.5">
-                </label>
-                <label class="grid">
-                  <span>Resort fee nightly before tax</span>
-                  <input id="stdResortNight" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="36">
-                </label>
-                <label class="grid">
-                  <span>Resort fee tax percent</span>
-                  <input id="stdResortTaxPct" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="12.5">
-                </label>
-                <label class="grid">
-                  <span>Hotel parking nightly with tax</span>
-                  <input id="stdParkingNight" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="33.75">
-                </label>
-              </div>
-            </div>
-            <div class="grid gap-2">
-              <div class="text-sm text-slate-600">Shades of Green Category I</div>
-              <div class="grid sm:grid-cols-2 gap-3 text-sm">
-                <label class="grid">
-                  <span>Nightly rate</span>
-                  <input id="sogNight" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="184">
-                </label>
-                <label class="grid">
-                  <span>SOG parking nightly</span>
-                  <input id="sogParkingNight" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="24">
-                </label>
-              </div>
-              <div class="text-xs text-slate-600">No room tax and no resort fee at SOG.</div>
-            </div>
-          </div>
+    <!-- TAB: TICKETS & ROOM -->
+    <section id="tickets" class="tab active">
+      <div class="card">
+        <h2>People</h2>
+        <div class="grid grid-4">
+          <label class="field">
+            <span>Adults (10+)</span>
+            <input id="adults" class="input calc" type="number" min="0" value="2" />
+          </label>
+          <label class="field">
+            <span>Children (3–9)</span>
+            <input id="children" class="input calc" type="number" min="0" value="1" />
+          </label>
+          <label class="field">
+            <span>Nights</span>
+            <input id="nights" class="input calc" type="number" min="1" value="5" />
+          </label>
+          <label class="field check">
+            <input id="useSOG" class="calc" type="checkbox" />
+            <span>Use Shades of Green room + tickets</span>
+          </label>
         </div>
       </div>
-    </section>
 
-    <section id="transport" class="tab space-y-4 hidden">
-      <div class="bg-white p-4 rounded-xl ring-1 ring-slate-200 shadow">
-        <div class="font-semibold">Fly</div>
-        <div class="grid sm:grid-cols-3 gap-3 mt-3 text-sm">
-          <label class="grid">
-            <span class="text-slate-600">Travelers</span>
-            <input id="flyTrav" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="3">
+      <div class="card">
+        <div class="card-head">
+          <h2>Ticket pricing</h2>
+          <div class="actions">
+            <button id="presetBase5" class="btn btn-ghost">Preset 5‑day Base: 753.83</button>
+            <button id="presetHop5" class="btn btn-ghost">Preset 5‑day Hopper: 858.83</button>
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <label class="field">
+            <span>Adult ticket (pre‑tax)</span>
+            <input id="adultTicketPre" class="input calc" type="number" step="0.01" value="753.83" />
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Flight price per traveler</span>
-            <input id="flightPer" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="340">
-          </label>
-          <label class="grid">
-            <span class="text-slate-600">Parking days at PIT</span>
-            <input id="pitDays" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="6">
+          <label class="field">
+            <span>Child ticket (pre‑tax)</span>
+            <input id="childTicketPre" class="input calc" type="number" step="0.01" placeholder="leave blank until known" />
           </label>
         </div>
-        <div class="grid sm:grid-cols-4 gap-3 mt-3 text-sm">
-          <label class="grid">
-            <span class="text-slate-600">Gas to PIT</span>
-            <input id="pitGas" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="40">
+        <div class="grid grid-3 mt">
+          <label class="field">
+            <span>Ticket tax % (standard)</span>
+            <input id="ticketTaxPct" class="input calc" type="number" step="0.01" value="6.5" />
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Parking per day</span>
-            <input id="pitParkPer" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="13">
-          </label>
-          <label class="grid">
-            <span class="text-slate-600">Airport transfer</span>
-            <select id="airXfer" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300">
-              <option value="bus" selected>Bus LYNX</option>
-              <option value="uber">Uber</option>
+          <label class="field">
+            <span>SOG discount %</span>
+            <select id="sogDiscPct" class="input calc">
+              <option value="20" selected>3+ days ≈ 20%</option>
+              <option value="10">1–2 days ≈ 10%</option>
             </select>
           </label>
-          <div class="grid grid-cols-2 gap-3">
-            <label class="grid">
-              <span class="text-slate-600">Bus fare per ride</span>
-              <input id="busFare" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="2">
-            </label>
-            <label class="grid">
-              <span class="text-slate-600">Uber round trip</span>
-              <input id="uberRT" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="100">
-            </label>
-          </div>
-        </div>
-        <div class="text-xs text-slate-600 mt-3">If Uber is used a booster seat is required. Checking one might be free or might not depending on the phase of the moon and the current price of tea in China.</div>
-      </div>
-
-      <div class="bg-white p-4 rounded-xl ring-1 ring-slate-200 shadow">
-        <div class="font-semibold">Drive</div>
-        <div class="grid sm:grid-cols-3 gap-3 mt-3 text-sm">
-          <label class="grid">
-            <span class="text-slate-600">Round trip miles</span>
-            <input id="drvMiles" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="2200">
-          </label>
-          <label class="grid">
-            <span class="text-slate-600">MPG</span>
-            <input id="drvMPG" type="number" step="0.1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="22">
-          </label>
-          <label class="grid">
-            <span class="text-slate-600">Gas price</span>
-            <input id="drvGasPrice" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="3.04">
-          </label>
-        </div>
-        <div class="grid sm:grid-cols-4 gap-3 mt-3 text-sm">
-          <label class="grid">
-            <span class="text-slate-600">Highway hotel nights</span>
-            <input id="drvHotelNights" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="2">
-          </label>
-          <label class="grid">
-            <span class="text-slate-600">Highway hotel nightly</span>
-            <input id="drvHotelPer" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="120">
-          </label>
-          <label class="grid">
-            <span class="text-slate-600">Road food per travel day</span>
-            <input id="drvFoodPer" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="60">
-          </label>
-          <label class="grid">
-            <span class="text-slate-600">Travel days round trip</span>
-            <input id="drvDays" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="4">
-          </label>
-        </div>
-        <div class="grid sm:grid-cols-4 gap-3 mt-3 text-sm">
-          <label class="grid">
-            <span class="text-slate-600">Drive to parks days</span>
-            <input id="parkDriveDays" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="0">
-          </label>
-          <label class="grid">
-            <span class="text-slate-600">Park parking per day</span>
-            <input id="parkParkingPer" type="number" step="0.01" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="35">
-          </label>
-          <label class="grid">
-            <span class="text-slate-600">Use hotel parking when driving</span>
-            <select id="useHotelParking" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300">
+          <label class="field">
+            <span>Use adult price for child if blank</span>
+            <select id="childFallback" class="input calc">
               <option value="1" selected>Yes</option>
               <option value="0">No</option>
             </select>
           </label>
         </div>
-        <div class="grid sm:grid-cols-3 gap-3 mt-3 text-sm">
-          <label class="grid">
-            <span class="text-slate-600">Moving hours one way</span>
-            <input id="moveHours" type="number" step="0.1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="16.5">
+      </div>
+
+      <div class="card">
+        <h2>Room pricing</h2>
+        <div class="grid grid-2">
+          <div>
+            <h3 class="subhead">Standard shuttle hotel</h3>
+            <div class="grid grid-2">
+              <label class="field">
+                <span>Base room (pre‑tax total)</span>
+                <input id="stdRoomPre" class="input calc" type="number" step="0.01" value="563" />
+              </label>
+              <label class="field">
+                <span>Room tax %</span>
+                <input id="stdRoomTaxPct" class="input calc" type="number" step="0.01" value="12.5" />
+              </label>
+              <label class="field">
+                <span>Resort fee / night (pre‑tax)</span>
+                <input id="stdResortNight" class="input calc" type="number" step="0.01" value="36" />
+              </label>
+              <label class="field">
+                <span>Resort fee tax %</span>
+                <input id="stdResortTaxPct" class="input calc" type="number" step="0.01" value="12.5" />
+              </label>
+              <label class="field">
+                <span>Hotel parking / night (with tax)</span>
+                <input id="stdParkingNight" class="input calc" type="number" step="0.01" value="33.75" />
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="subhead">Shades of Green (Cat I, E‑6)</h3>
+            <div class="grid grid-2">
+              <label class="field">
+                <span>Nightly rate (tax‑free)</span>
+                <input id="sogNight" class="input calc" type="number" step="0.01" value="184" />
+              </label>
+              <label class="field">
+                <span>SOG parking / night</span>
+                <input id="sogParkingNight" class="input calc" type="number" step="0.01" value="24" />
+              </label>
+            </div>
+            <p class="hint">No room tax and no resort fee at SOG. Buses to parks included.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: TRANSPORT & FOOD -->
+    <section id="transport" class="tab">
+      <div class="card">
+        <h2>Fly</h2>
+        <div class="grid grid-4">
+          <label class="field">
+            <span>Travelers</span>
+            <input id="flyTrav" class="input calc" type="number" min="0" value="3" />
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Hours driving per day</span>
-            <input id="hoursPerDay" type="number" step="0.1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="8">
+          <label class="field">
+            <span>Flight price / traveler</span>
+            <input id="flightPer" class="input calc" type="number" step="0.01" value="340" />
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Break every hours</span>
-            <input id="breakEvery" type="number" step="0.1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="2.5">
+          <label class="field">
+            <span>Parking days at PIT</span>
+            <input id="pitDays" class="input calc" type="number" min="0" value="6" />
+          </label>
+          <label class="field">
+            <span>Gas to PIT</span>
+            <input id="pitGas" class="input calc" type="number" step="0.01" value="40" />
           </label>
         </div>
-        <div class="grid sm:grid-cols-3 gap-3 mt-3 text-sm">
-          <label class="grid">
-            <span class="text-slate-600">Break minutes each</span>
-            <input id="breakMins" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="20">
+        <div class="grid grid-3 mt">
+          <label class="field">
+            <span>Parking / day at PIT</span>
+            <input id="pitParkPer" class="input calc" type="number" step="0.01" value="13" />
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Fuel stops round trip</span>
-            <input id="fuelStops" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="6">
+          <label class="field">
+            <span>Airport transfer</span>
+            <select id="airXfer" class="input calc">
+              <option value="bus" selected>LYNX bus</option>
+              <option value="uber">Uber</option>
+            </select>
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Fuel stop minutes each</span>
-            <input id="fuelStopMins" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="10">
+          <label class="field">
+            <span>Uber round‑trip</span>
+            <input id="uberRT" class="input calc" type="number" step="0.01" value="100" />
+          </label>
+        </div>
+        <div class="grid grid-2 mt">
+          <label class="field">
+            <span>LYNX fare per ride</span>
+            <input id="busFare" class="input calc" type="number" step="0.01" value="2" />
+          </label>
+          <label class="field">
+            <span>Notes</span>
+            <div class="note">If Uber is used a booster seat is required; checking one might be free… or might not (phase of the moon; tea prices in China).</div>
           </label>
         </div>
       </div>
 
-      <div class="bg-white p-4 rounded-xl ring-1 ring-slate-200 shadow">
-        <div class="font-semibold">Food during stay</div>
-        <div class="grid sm:grid-cols-3 gap-3 mt-3 text-sm">
-          <label class="grid">
-            <span class="text-slate-600">Park days for food</span>
-            <input id="stayFoodDays" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="5">
+      <div class="card">
+        <h2>Drive</h2>
+        <div class="grid grid-4">
+          <label class="field">
+            <span>Round‑trip miles</span>
+            <input id="drvMiles" class="input calc" type="number" value="2200" />
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Food per day</span>
-            <input id="stayFoodPer" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="100">
+          <label class="field">
+            <span>MPG</span>
+            <input id="drvMPG" class="input calc" type="number" step="0.1" value="22" />
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Souvenir budget</span>
-            <input id="souvenirBudget" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="500">
+          <label class="field">
+            <span>Gas price</span>
+            <input id="drvGasPrice" class="input calc" type="number" step="0.01" value="3.04" />
+          </label>
+          <label class="field">
+            <span>Highway hotel nights</span>
+            <input id="drvHotelNights" class="input calc" type="number" min="0" value="2" />
+          </label>
+        </div>
+        <div class="grid grid-4 mt">
+          <label class="field">
+            <span>Highway hotel nightly</span>
+            <input id="drvHotelPer" class="input calc" type="number" step="0.01" value="120" />
+          </label>
+          <label class="field">
+            <span>Road food / travel day</span>
+            <input id="drvFoodPer" class="input calc" type="number" value="60" />
+          </label>
+          <label class="field">
+            <span>Travel days (round‑trip)</span>
+            <input id="drvDays" class="input calc" type="number" min="0" value="4" />
+          </label>
+          <label class="field">
+            <span>Drive to parks (days)</span>
+            <input id="parkDriveDays" class="input calc" type="number" min="0" value="0" />
+          </label>
+        </div>
+        <div class="grid grid-3 mt">
+          <label class="field">
+            <span>Theme‑park parking / day</span>
+            <input id="parkParkingPer" class="input calc" type="number" step="0.01" value="35" />
+          </label>
+          <label class="field">
+            <span>Use hotel parking charges</span>
+            <select id="useHotelParking" class="input calc">
+              <option value="1" selected>Yes (include)</option>
+              <option value="0">No</option>
+            </select>
+          </label>
+        </div>
+
+        <h3 class="subhead mt">Timing (per direction)</h3>
+        <div class="grid grid-4">
+          <label class="field">
+            <span>Moving hours</span>
+            <input id="moveHours" class="input calc" type="number" step="0.1" value="16.5" />
+          </label>
+          <label class="field">
+            <span>Hours driving / day</span>
+            <input id="hoursPerDay" class="input calc" type="number" step="0.1" value="8" />
+          </label>
+          <label class="field">
+            <span>Break every (hours)</span>
+            <input id="breakEvery" class="input calc" type="number" step="0.1" value="2.5" />
+          </label>
+          <label class="field">
+            <span>Break minutes each</span>
+            <input id="breakMins" class="input calc" type="number" step="1" value="20" />
+          </label>
+        </div>
+        <div class="grid grid-3 mt">
+          <label class="field">
+            <span>Fuel stops (round‑trip)</span>
+            <input id="fuelStops" class="input calc" type="number" step="1" value="6" />
+          </label>
+          <label class="field">
+            <span>Fuel stop minutes each</span>
+            <input id="fuelStopMins" class="input calc" type="number" step="1" value="10" />
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Food during stay & souvenirs</h2>
+        <div class="grid grid-3">
+          <label class="field">
+            <span>Days counted for food</span>
+            <input id="stayFoodDays" class="input calc" type="number" min="0" value="5" />
+          </label>
+          <label class="field">
+            <span>Food / day</span>
+            <input id="stayFoodPer" class="input calc" type="number" value="100" />
+          </label>
+          <label class="field">
+            <span>Souvenirs (total)</span>
+            <input id="souvenirBudget" class="input calc" type="number" value="500" />
           </label>
         </div>
       </div>
     </section>
 
-    <section id="extras" class="tab space-y-4 hidden">
-      <div class="bg-white p-4 rounded-xl ring-1 ring-slate-200 shadow">
-        <div class="font-semibold">Add ons</div>
-        <div class="grid sm:grid-cols-3 gap-3 mt-3 text-sm">
-          <label class="grid">
-            <span class="text-slate-600">Multi Pass price pp per day</span>
-            <input id="llMultiPer" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="0">
+    <!-- TAB: EXTRAS -->
+    <section id="extras" class="tab">
+      <div class="card">
+        <h2>Lightning Lane & premium experiences</h2>
+        <div class="grid grid-3">
+          <label class="field">
+            <span>Multi Pass price (pp/day)</span>
+            <input id="llMultiPer" class="input calc" type="number" value="0" />
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Multi Pass days</span>
-            <input id="llMultiDays" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="0">
+          <label class="field">
+            <span>Multi Pass days</span>
+            <input id="llMultiDays" class="input calc" type="number" value="0" />
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Multi Pass people</span>
-            <input id="llMultiPeople" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="3">
-          </label>
-        </div>
-        <div class="grid sm:grid-cols-3 gap-3 mt-3 text-sm">
-          <label class="grid">
-            <span class="text-slate-600">Single Pass price pp</span>
-            <input id="llSinglePer" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="0">
-          </label>
-          <label class="grid">
-            <span class="text-slate-600">Single Pass rides</span>
-            <input id="llSingleCount" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="0">
-          </label>
-          <label class="grid">
-            <span class="text-slate-600">Single Pass people</span>
-            <input id="llSinglePeople" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="3">
+          <label class="field">
+            <span>Multi Pass people</span>
+            <input id="llMultiPeople" class="input calc" type="number" value="3" />
           </label>
         </div>
-        <div class="grid sm:grid-cols-3 gap-3 mt-3 text-sm">
-          <label class="grid">
-            <span class="text-slate-600">Dessert party adult</span>
-            <input id="dessertAdult" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="0">
+        <div class="grid grid-3 mt">
+          <label class="field">
+            <span>Single Pass price (pp/ride)</span>
+            <input id="llSinglePer" class="input calc" type="number" value="0" />
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Dessert party child</span>
-            <input id="dessertChild" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="0">
+          <label class="field">
+            <span>Single Pass rides</span>
+            <input id="llSingleCount" class="input calc" type="number" value="0" />
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Dessert party qty total</span>
-            <input id="dessertQty" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="0">
-          </label>
-        </div>
-        <div class="grid sm:grid-cols-3 gap-3 mt-3 text-sm">
-          <label class="grid">
-            <span class="text-slate-600">Savi lightsaber</span>
-            <input id="saviPer" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="274.99">
-          </label>
-          <label class="grid">
-            <span class="text-slate-600">Savi qty</span>
-            <input id="saviQty" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="0">
-          </label>
-          <label class="grid">
-            <span class="text-slate-600">Droid Depot per</span>
-            <input id="droidPer" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="129">
+          <label class="field">
+            <span>Single Pass people</span>
+            <input id="llSinglePeople" class="input calc" type="number" value="3" />
           </label>
         </div>
-        <div class="grid sm:grid-cols-3 gap-3 mt-3 text-sm">
-          <label class="grid">
-            <span class="text-slate-600">Droid qty</span>
-            <input id="droidQty" type="number" min="0" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="0">
+      </div>
+
+      <div class="card">
+        <h2>Events & builds</h2>
+        <div class="grid grid-3">
+          <label class="field">
+            <span>Dessert party (adult)</span>
+            <input id="dessertAdult" class="input calc" type="number" value="0" />
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Memory Maker</span>
-            <input id="memoryMaker" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="0">
+          <label class="field">
+            <span>Dessert party (child)</span>
+            <input id="dessertChild" class="input calc" type="number" value="0" />
           </label>
-          <label class="grid">
-            <span class="text-slate-600">Other extras</span>
-            <input id="otherExtras" type="number" step="1" class="calc-input mt-1 px-3 py-2 rounded-lg ring-1 ring-slate-300" value="0">
+          <label class="field">
+            <span>Dessert party total attendees</span>
+            <input id="dessertQty" class="input calc" type="number" value="0" />
+          </label>
+        </div>
+        <div class="grid grid-3 mt">
+          <label class="field">
+            <span>Savi’s lightsaber (each)</span>
+            <input id="saviPer" class="input calc" type="number" step="0.01" value="274.99" />
+          </label>
+          <label class="field">
+            <span>Savi’s qty</span>
+            <input id="saviQty" class="input calc" type="number" value="0" />
+          </label>
+          <label class="field">
+            <span>Droid Depot (each)</span>
+            <input id="droidPer" class="input calc" type="number" value="129" />
+          </label>
+        </div>
+        <div class="grid grid-3 mt">
+          <label class="field">
+            <span>Droid qty</span>
+            <input id="droidQty" class="input calc" type="number" value="0" />
+          </label>
+          <label class="field">
+            <span>Memory Maker</span>
+            <input id="memoryMaker" class="input calc" type="number" value="0" />
+          </label>
+          <label class="field">
+            <span>Other extras (total)</span>
+            <input id="otherExtras" class="input calc" type="number" value="0" />
           </label>
         </div>
       </div>
     </section>
 
-    <section id="summary" class="tab space-y-4 hidden">
-      <div class="bg-white p-4 rounded-xl ring-1 ring-slate-200 shadow">
-        <div class="font-semibold mb-2">Tickets</div>
-        <div id="ticketsDetail" class="text-sm"></div>
+    <!-- TAB: SUMMARY -->
+    <section id="summary" class="tab">
+      <div class="card">
+        <h2>Tickets</h2>
+        <div id="ticketsDetail" class="details"></div>
       </div>
 
-      <div class="bg-white p-4 rounded-xl ring-1 ring-slate-200 shadow">
-        <div class="font-semibold mb-2">Room</div>
-        <div id="roomDetail" class="text-sm"></div>
+      <div class="card">
+        <h2>Room</h2>
+        <div id="roomDetail" class="details"></div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-4">
-        <div class="bg-white p-4 rounded-xl ring-1 ring-slate-200 shadow">
-          <div class="font-semibold mb-2">Fly plan</div>
-          <div id="flyDetail" class="text-sm"></div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h2>Fly plan</h2>
+          <div id="flyDetail" class="details"></div>
         </div>
-        <div class="bg-white p-4 rounded-xl ring-1 ring-slate-200 shadow">
-          <div class="font-semibold mb-2">Drive plan</div>
-          <div id="driveDetail" class="text-sm"></div>
+        <div class="card">
+          <h2>Drive plan</h2>
+          <div id="driveDetail" class="details"></div>
         </div>
       </div>
 
-      <div class="bg-white p-4 rounded-xl ring-1 ring-slate-200 shadow">
-        <div class="font-semibold mb-2">Extras and souvenirs</div>
-        <div id="extrasDetail" class="text-sm"></div>
+      <div class="card">
+        <h2>Extras & souvenirs</h2>
+        <div id="extrasDetail" class="details"></div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-4">
-        <div class="bg-slate-900 text-white p-4 rounded-xl">
-          <div class="font-semibold">Fly grand total</div>
-          <div id="flyTotal" class="text-2xl mt-1"></div>
+      <div class="grid grid-2">
+        <div class="total total-dark">
+          <div>Fly grand total</div>
+          <div id="flyTotal" class="total-amount"></div>
         </div>
-        <div class="bg-slate-900 text-white p-4 rounded-xl">
-          <div class="font-semibold">Drive grand total</div>
-          <div id="driveTotal" class="text-2xl mt-1"></div>
+        <div class="total total-dark">
+          <div>Drive grand total</div>
+          <div id="driveTotal" class="total-amount"></div>
         </div>
+      </div>
+
+      <div class="card">
+        <h2>Head‑to‑head comparison</h2>
+        <div id="compareDetail" class="details"></div>
       </div>
     </section>
   </div>
 
-  <script>
-    function money(n){return "$" + (Math.round((n + Number.EPSILON)*100)/100).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}
-    function num(id){const v=parseFloat(document.getElementById(id).value);return isNaN(v)?0:v}
-    function set(id,v){document.getElementById(id).value=v}
-    function html(id,s){document.getElementById(id).innerHTML=s}
-
-    function calcTickets(){
-      const useSOG=document.getElementById("useSOG").checked
-      const adults=num("adults"), children=num("children")
-      const adultPre=num("adultTicketPre"), childPreRaw=num("childTicketPre")
-      const childFallback=document.getElementById("childFallback").value==="1"
-      const childPre=childPreRaw>0?childPreRaw:(childFallback?adultPre:0)
-      const taxPct=num("ticketTaxPct")/100
-      const sogDisc=num("sogDiscPct")/100
-      let adultEach=adultPre, childEach=childPre, tax=0, disc=0
-      if(useSOG){disc=sogDisc; tax=0}else{tax=taxPct; disc=0}
-      const adultFinal=adultEach*(1-disc)*(1+tax)
-      const childFinal=childEach*(1-disc)*(1+tax)
-      const total=adultFinal*adults+childFinal*children
-      const lines=[]
-      lines.push("Adults x " + adults + " at " + money(adultFinal) + " each = " + money(adultFinal*adults))
-      lines.push("Children x " + children + " at " + money(childFinal) + " each = " + money(childFinal*children))
-      lines.push("Tax " + Math.round(tax*100) + "%, SOG discount " + Math.round(disc*100) + "%")
-      return {total, text:lines.join("<br>")}
-    }
-
-    function calcRoom(driving){
-      const nights=num("nights")
-      const useSOG=document.getElementById("useSOG").checked
-      if(useSOG){
-        const sogNight=num("sogNight")
-        const sogParkNight=num("sogParkingNight")
-        const park=driving? sogParkNight*nights : 0
-        const total=sogNight*nights+park
-        const t="Room " + nights + " x " + money(sogNight) + " = " + money(sogNight*nights) + (driving? "<br>Parking " + nights + " x " + money(sogParkNight) + " = " + money(park):"") + "<br>Total room " + money(total)
-        return {total, text:t}
-      }else{
-        const pre=num("stdRoomPre")
-        const roomTaxPct=num("stdRoomTaxPct")/100
-        const resortNight=num("stdResortNight")
-        const resortTaxPct=num("stdResortTaxPct")/100
-        const parkNight=num("stdParkingNight")
-        const room=pre*(1+roomTaxPct)
-        const resort=nights*resortNight*(1+resortTaxPct)
-        const park=driving? nights*parkNight : 0
-        const total=room+resort+park
-        const t="Room base " + money(pre) + " with tax " + Math.round(roomTaxPct*100) + "% = " + money(room) + "<br>Resort fee " + nights + " x " + money(resortNight) + " with tax " + Math.round(resortTaxPct*100) + "% = " + money(resort) + (driving? "<br>Parking " + nights + " x " + money(parkNight) + " = " + money(park):"") + "<br>Total room " + money(total)
-        return {total, text:t}
-      }
-    }
-
-    function calcFly(){
-      const trav=num("flyTrav"), per=num("flightPer")
-      const pitGas=num("pitGas"), pitDays=num("pitDays"), pitPer=num("pitParkPer")
-      const airXfer=document.getElementById("airXfer").value
-      const busFare=num("busFare"), uberRT=num("uberRT")
-      const flights=trav*per
-      const pit=pitGas + pitDays*pitPer
-      const xfer= airXfer==="bus" ? trav*2*busFare : uberRT
-      const total=flights+pit+xfer
-      const lines=[]
-      lines.push("Flights " + trav + " x " + money(per) + " = " + money(flights))
-      lines.push("PIT gas and parking = " + money(pit))
-      lines.push(airXfer==="bus" ? "LYNX " + trav + " people x 2 rides x " + money(busFare) + " = " + money(xfer) : "Uber round trip = " + money(xfer))
-      return {total, text:lines.join("<br>")}
-    }
-
-    function calcDrive(){
-      const miles=num("drvMiles"), mpg=num("drvMPG"), gp=num("drvGasPrice")
-      const hotelN=num("drvHotelNights"), hotelPer=num("drvHotelPer")
-      const foodPer=num("drvFoodPer"), days=num("drvDays")
-      const parkDriveDays=num("parkDriveDays"), parkPer=num("parkParkingPer")
-      const useHotelParking=document.getElementById("useHotelParking").value==="1"
-      const fuelCost=(miles/mpg)*gp
-      const roadHotels=hotelN*hotelPer
-      const roadFood=days*foodPer
-      const parkParking=parkDriveDays*parkPer
-      const room=calcRoom(useHotelParking)
-      const tickets=calcTickets()
-      const stayFood=num("stayFoodPer")*num("stayFoodDays")
-      const extras=calcExtrasTotal()
-      const total=fuelCost+roadHotels+roadFood+room.total+tickets.total+stayFood+extras+parkParking
-      const lines=[]
-      lines.push("Fuel " + money(fuelCost))
-      lines.push("Highway hotels " + hotelN + " x " + money(hotelPer) + " = " + money(roadHotels))
-      lines.push("Road meals " + days + " x " + money(foodPer) + " = " + money(roadFood))
-      lines.push(room.text)
-      lines.push("Tickets total " + money(tickets.total))
-      lines.push("Food during stay " + money(stayFood))
-      if(parkParking>0) lines.push("Theme park parking " + money(parkParking))
-      lines.push("Extras and souvenirs " + money(extras))
-      return {total, text:lines.join("<br>")}
-    }
-
-    function calcFlyPlan(){
-      const room=calcRoom(false)
-      const tickets=calcTickets()
-      const fly=calcFly()
-      const stayFood=num("stayFoodPer")*num("stayFoodDays")
-      const extras=calcExtrasTotal()
-      const total=room.total+tickets.total+fly.total+stayFood+extras
-      const lines=[]
-      lines.push(fly.text)
-      lines.push(room.text)
-      lines.push("Tickets total " + money(tickets.total))
-      lines.push("Food during stay " + money(stayFood))
-      lines.push("Extras and souvenirs " + money(extras))
-      return {total, text:lines.join("<br>")}
-    }
-
-    function calcExtrasTotal(){
-      const mp=num("llMultiPer"), mpd=num("llMultiDays"), mpp=num("llMultiPeople")
-      const sp=num("llSinglePer"), spc=num("llSingleCount"), spp=num("llSinglePeople")
-      const da=num("dessertAdult"), dc=num("dessertChild"), dq=num("dessertQty")
-      const sav=num("saviPer"), savq=num("saviQty")
-      const dro=num("droidPer"), droq=num("droidQty")
-      const mem=num("memoryMaker"), oth=num("otherExtras")
-      const sov=num("souvenirBudget")
-      const multi=mp*mpd*mpp
-      const single=sp*spc*spp
-      const dessert=(da*2+dc)*Math.floor(dq/3)+(dq%3===0?0:(dq%3===1?da:da+dc))
-      const builds=sav*savq+dro*droq
-      const total=multi+single+dessert+builds+mem+oth+sov
-      return total
-    }
-
-    function fillSummary(){
-      const tickets=calcTickets()
-      const roomStd=calcRoom(false)
-      const flyPlan=calcFlyPlan()
-      const drivePlan=calcDrive()
-
-      html("ticketsDetail", tickets.text + "<br>Total " + money(tickets.total))
-      html("roomDetail", roomStd.text)
-      html("flyDetail", flyPlan.text)
-      html("driveDetail", drivePlan.text)
-      html("extrasDetail", "Extras and souvenirs total " + money(calcExtrasTotal()))
-      html("flyTotal", money(flyPlan.total))
-      html("driveTotal", money(drivePlan.total))
-    }
-
-    function activateTab(name){
-      document.querySelectorAll(".tab").forEach(s=>s.classList.add("hidden"))
-      document.getElementById(name).classList.remove("hidden")
-      document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("shadow","bg-white","ring-slate-200"))
-      document.querySelectorAll(".tab-btn").forEach(b=>b.classList.add("ring-1","ring-slate-200"))
-      document.querySelector('.tab-btn[data-tab="'+name+'"]').classList.add("shadow","bg-white")
-    }
-
-    document.querySelectorAll(".tab-btn").forEach(b=>b.addEventListener("click",e=>activateTab(b.dataset.tab)))
-    document.querySelectorAll(".calc-input").forEach(i=>i.addEventListener("input",fillSummary))
-    document.getElementById("presetBase5").addEventListener("click",()=>{set("adultTicketPre",753.83);fillSummary()})
-    document.getElementById("presetHop5").addEventListener("click",()=>{set("adultTicketPre",858.83);fillSummary()})
-    document.getElementById("resetBtn").addEventListener("click",()=>location.reload())
-
-    activateTab("tickets")
-    fillSummary()
-  </script>
+  <script src="app.js" defer></script>
 </body>
 </html>
